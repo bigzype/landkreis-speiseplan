@@ -10,7 +10,7 @@ REFRESH-INTERVAL;VALUE=DURATION:PT6H
 X-PUBLISHED-TTL:PT6H
 BEGIN:VEVENT
 UID:landkreis-speiseplan-2026-08-17@pro-mac-support.de
-SEQUENCE:4
+SEQUENCE:5
 DTSTAMP:20260817T000000Z
 DTSTART;VALUE=DATE:20260817
 DTEND;VALUE=DATE:20260818
@@ -27,8 +27,9 @@ DESCRIPTION:EINTOPF\n───────\n• Schnippelbohnen / Kartoff
  • Honig-Möhrchen – 1\,00 €\n\n• Mexikogemüse – 1\,20 €\n\n
  \nDESSERT\n───────\n• Tages-Dessert – 1\,20 €\n\n\n\
  nWEITERE INFORMATIONEN\n────────────────
- ─────\nSpeiseplan als PDF\nÖffnungszeiten: Mo–Fr 12:00–13
- :30 Uhr\nTelefon: 0541 5011 064\nE-Mail: lampe@landkreisrestaurant.de
+ ─────\nÖffnungszeiten: Mo–Fr 12:00–13:30 Uhr\nTelefon: 05
+ 41 5011 064\nE-Mail: lampe@landkreisrestaurant.de\nWeb: www.landkreis-re
+ staurant.de
 X-ALT-DESC;FMTTYPE=text/html:<html><body><p><strong><u>Eintopf</u></stron
  g><br>• Schnippelbohnen / Kartoffeleintopf mit / ohne Wurst – 6\,00 
  €<br><br></p><p><strong><u>Hauptgerichte</u></strong><br>• Hähnchen
@@ -41,21 +42,19 @@ X-ALT-DESC;FMTTYPE=text/html:<html><body><p><strong><u>Eintopf</u></stron
  rong><u>Gemüsebeilagen</u></strong><br>• Honig-Möhrchen – 1\,00 
  €<br><br>• Mexikogemüse – 1\,20 €<br><br></p><p><strong><u>Dess
  ert</u></strong><br>• Tages-Dessert – 1\,20 €<br><br></p><br><p><s
- trong><u>Weitere Informationen</u></strong><br><a href="https://www.land
- kreis-restaurant.de/documents/276/Speise34.2026.pdf">Speiseplan als PDF<
- /a><br>Öffnungszeiten: Mo–Fr 12:00–13:30 Uhr<br><a href="tel:+49541
- 5011064">Telefon: 0541 5011 064</a><br><a href="mailto:lampe@landkreisre
- staurant.de">E-Mail: lampe@landkreisrestaurant.de</a></p></body></html>
+ trong><u>Weitere Informationen</u></strong><br>Öffnungszeiten: Mo–Fr 
+ 12:00–13:30 Uhr<br><a href="tel:+495415011064">Telefon: 0541 5011 064<
+ /a><br><a href="mailto:lampe@landkreisrestaurant.de">E-Mail: lampe@landk
+ reisrestaurant.de</a><br><a href="https://www.landkreis-restaurant.de">W
+ eb: www.landkreis-restaurant.de</a></p></body></html>
 LOCATION:Landkreis Restaurant Osnabrück\, Am Schölerberg 1\, 49082 Osna
  brück\, Deutschland
 URL:https://www.landkreis-restaurant.de/documents/276/Speise34.2026.pdf
-LINK;VALUE=URI;REL=alternate;LABEL="Speiseplan als PDF":https://www.landk
- reis-restaurant.de/documents/276/Speise34.2026.pdf
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:landkreis-speiseplan-2026-08-18@pro-mac-support.de
-SEQUENCE:4
+SEQUENCE:5
 DTSTAMP:20260817T000000Z
 DTSTART;VALUE=DATE:20260818
 DTEND;VALUE=DATE:20260819
@@ -73,9 +72,9 @@ DESCRIPTION:EINTOPF\n───────\n• Wirsing-Kartoffeleintopf
  ───────────\n• Brokkoli – 1\,00 €\n\n• Ros
  enkohl mit Röstzwiebeln – 1\,00 €\n\n\nDESSERT\n──────
  ─\n• Tages-Dessert – 1\,20 €\n\n\n\nWEITERE INFORMATIONEN\n─
- ────────────────────\nSpeiseplan
-  als PDF\nÖffnungszeiten: Mo–Fr 12:00–13:30 Uhr\nTelefon: 0541 5011
-  064\nE-Mail: lampe@landkreisrestaurant.de
+ ────────────────────\nÖffnungsz
+ eiten: Mo–Fr 12:00–13:30 Uhr\nTelefon: 0541 5011 064\nE-Mail: lampe@
+ landkreisrestaurant.de\nWeb: www.landkreis-restaurant.de
 X-ALT-DESC;FMTTYPE=text/html:<html><body><p><strong><u>Eintopf</u></stron
  g><br>• Wirsing-Kartoffeleintopf Mit / ohne Wurst – 6\,00 €<br><br
  ></p><p><strong><u>Hauptgerichte</u></strong><br>• Schlankwelsfilet le
@@ -89,21 +88,19 @@ X-ALT-DESC;FMTTYPE=text/html:<html><body><p><strong><u>Eintopf</u></stron
  >• Brokkoli – 1\,00 €<br><br>• Rosenkohl mit Röstzwiebeln – 1
  \,00 €<br><br></p><p><strong><u>Dessert</u></strong><br>• Tages-Dess
  ert – 1\,20 €<br><br></p><br><p><strong><u>Weitere Informationen</u>
- </strong><br><a href="https://www.landkreis-restaurant.de/documents/276/
- Speise34.2026.pdf">Speiseplan als PDF</a><br>Öffnungszeiten: Mo–Fr 12
- :00–13:30 Uhr<br><a href="tel:+495415011064">Telefon: 0541 5011 064</a
- ><br><a href="mailto:lampe@landkreisrestaurant.de">E-Mail: lampe@landkre
- isrestaurant.de</a></p></body></html>
+ </strong><br>Öffnungszeiten: Mo–Fr 12:00–13:30 Uhr<br><a href="tel:
+ +495415011064">Telefon: 0541 5011 064</a><br><a href="mailto:lampe@landk
+ reisrestaurant.de">E-Mail: lampe@landkreisrestaurant.de</a><br><a href="
+ https://www.landkreis-restaurant.de">Web: www.landkreis-restaurant.de</a
+ ></p></body></html>
 LOCATION:Landkreis Restaurant Osnabrück\, Am Schölerberg 1\, 49082 Osna
  brück\, Deutschland
 URL:https://www.landkreis-restaurant.de/documents/276/Speise34.2026.pdf
-LINK;VALUE=URI;REL=alternate;LABEL="Speiseplan als PDF":https://www.landk
- reis-restaurant.de/documents/276/Speise34.2026.pdf
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:landkreis-speiseplan-2026-08-19@pro-mac-support.de
-SEQUENCE:4
+SEQUENCE:5
 DTSTAMP:20260817T000000Z
 DTSTART;VALUE=DATE:20260819
 DTEND;VALUE=DATE:20260820
@@ -120,9 +117,9 @@ DESCRIPTION:EINTOPF\n───────\n• Linsen-Kartoffeleintopf m
  ──────────\n• Kaisergemüse – 1\,00 €\n\n• K
  ohlrabi – 1\,00 €\n\n\nDESSERT\n───────\n• Tages-Des
  sert – 1\,20 €\n\n\n\nWEITERE INFORMATIONEN\n───────
- ──────────────\nSpeiseplan als PDF\nÖffnung
- szeiten: Mo–Fr 12:00–13:30 Uhr\nTelefon: 0541 5011 064\nE-Mail: lamp
- e@landkreisrestaurant.de
+ ──────────────\nÖffnungszeiten: Mo–Fr 12:
+ 00–13:30 Uhr\nTelefon: 0541 5011 064\nE-Mail: lampe@landkreisrestauran
+ t.de\nWeb: www.landkreis-restaurant.de
 X-ALT-DESC;FMTTYPE=text/html:<html><body><p><strong><u>Eintopf</u></stron
  g><br>• Linsen-Kartoffeleintopf mit frischen Liebstöckel „Veggi“ 
  oder mit Mettwurst – 6\,00 €<br><br></p><p><strong><u>Hauptgerichte<
@@ -135,22 +132,20 @@ X-ALT-DESC;FMTTYPE=text/html:<html><body><p><strong><u>Eintopf</u></stron
   – 1\,00 €<br><br></p><p><strong><u>Gemüsebeilagen</u></strong><br>
  • Kaisergemüse – 1\,00 €<br><br>• Kohlrabi – 1\,00 €<br><br
  ></p><p><strong><u>Dessert</u></strong><br>• Tages-Dessert – 1\,20 
- €<br><br></p><br><p><strong><u>Weitere Informationen</u></strong><br><
- a href="https://www.landkreis-restaurant.de/documents/276/Speise34.2026.
- pdf">Speiseplan als PDF</a><br>Öffnungszeiten: Mo–Fr 12:00–13:30 Uh
- r<br><a href="tel:+495415011064">Telefon: 0541 5011 064</a><br><a href="
- mailto:lampe@landkreisrestaurant.de">E-Mail: lampe@landkreisrestaurant.d
- e</a></p></body></html>
+ €<br><br></p><br><p><strong><u>Weitere Informationen</u></strong><br>
+ Öffnungszeiten: Mo–Fr 12:00–13:30 Uhr<br><a href="tel:+495415011064
+ ">Telefon: 0541 5011 064</a><br><a href="mailto:lampe@landkreisrestauran
+ t.de">E-Mail: lampe@landkreisrestaurant.de</a><br><a href="https://www.l
+ andkreis-restaurant.de">Web: www.landkreis-restaurant.de</a></p></body><
+ /html>
 LOCATION:Landkreis Restaurant Osnabrück\, Am Schölerberg 1\, 49082 Osna
  brück\, Deutschland
 URL:https://www.landkreis-restaurant.de/documents/276/Speise34.2026.pdf
-LINK;VALUE=URI;REL=alternate;LABEL="Speiseplan als PDF":https://www.landk
- reis-restaurant.de/documents/276/Speise34.2026.pdf
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:landkreis-speiseplan-2026-08-20@pro-mac-support.de
-SEQUENCE:4
+SEQUENCE:5
 DTSTAMP:20260817T000000Z
 DTSTART;VALUE=DATE:20260820
 DTEND;VALUE=DATE:20260821
@@ -168,9 +163,9 @@ DESCRIPTION:EINTOPF\n───────\n• Karotten-Kartoffeleintopf
  ──────────\n• Preiselbeer-rotkohl – 1\,00 €\n\
  n• Feine Erbsen – 1\,00 €\n\n\nDESSERT\n───────\n•
   Tages-Dessert – 1\,20 €\n\n\n\nWEITERE INFORMATIONEN\n────
- ─────────────────\nSpeiseplan als PDF\
- nÖffnungszeiten: Mo–Fr 12:00–13:30 Uhr\nTelefon: 0541 5011 064\nE-M
- ail: lampe@landkreisrestaurant.de
+ ─────────────────\nÖffnungszeiten: Mo
+ –Fr 12:00–13:30 Uhr\nTelefon: 0541 5011 064\nE-Mail: lampe@landkreis
+ restaurant.de\nWeb: www.landkreis-restaurant.de
 X-ALT-DESC;FMTTYPE=text/html:<html><body><p><strong><u>Eintopf</u></stron
  g><br>• Karotten-Kartoffeleintopf mit Bockwurst – 6\,00 €<br><br><
  /p><p><strong><u>Hauptgerichte</u></strong><br>• Geschmorte Rinderroul
@@ -184,21 +179,19 @@ X-ALT-DESC;FMTTYPE=text/html:<html><body><p><strong><u>Eintopf</u></stron
  • Preiselbeer-rotkohl – 1\,00 €<br><br>• Feine Erbsen – 1\,00 
  €<br><br></p><p><strong><u>Dessert</u></strong><br>• Tages-Dessert 
  – 1\,20 €<br><br></p><br><p><strong><u>Weitere Informationen</u></st
- rong><br><a href="https://www.landkreis-restaurant.de/documents/276/Spei
- se34.2026.pdf">Speiseplan als PDF</a><br>Öffnungszeiten: Mo–Fr 12:00
- –13:30 Uhr<br><a href="tel:+495415011064">Telefon: 0541 5011 064</a><b
- r><a href="mailto:lampe@landkreisrestaurant.de">E-Mail: lampe@landkreisr
- estaurant.de</a></p></body></html>
+ rong><br>Öffnungszeiten: Mo–Fr 12:00–13:30 Uhr<br><a href="tel:+495
+ 415011064">Telefon: 0541 5011 064</a><br><a href="mailto:lampe@landkreis
+ restaurant.de">E-Mail: lampe@landkreisrestaurant.de</a><br><a href="http
+ s://www.landkreis-restaurant.de">Web: www.landkreis-restaurant.de</a></p
+ ></body></html>
 LOCATION:Landkreis Restaurant Osnabrück\, Am Schölerberg 1\, 49082 Osna
  brück\, Deutschland
 URL:https://www.landkreis-restaurant.de/documents/276/Speise34.2026.pdf
-LINK;VALUE=URI;REL=alternate;LABEL="Speiseplan als PDF":https://www.landk
- reis-restaurant.de/documents/276/Speise34.2026.pdf
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:landkreis-speiseplan-2026-08-21@pro-mac-support.de
-SEQUENCE:4
+SEQUENCE:5
 DTSTAMP:20260817T000000Z
 DTSTART;VALUE=DATE:20260821
 DTEND;VALUE=DATE:20260822
@@ -211,9 +204,9 @@ DESCRIPTION:EINTOPF\n───────\n• Pichelsteiner Gemüseeint
  0 €\n\n\nGEMÜSEBEILAGEN\n──────────────\n
  • Apfelrotkohl – 1\,00 €\n\n\nDESSERT\n───────\n• 
  Tages-Dessert – 1\,20 €\n\n\n\nWEITERE INFORMATIONEN\n────
- ─────────────────\nSpeiseplan als PDF\
- nÖffnungszeiten: Mo–Fr 12:00–13:30 Uhr\nTelefon: 0541 5011 064\nE-M
- ail: lampe@landkreisrestaurant.de
+ ─────────────────\nÖffnungszeiten: Mo
+ –Fr 12:00–13:30 Uhr\nTelefon: 0541 5011 064\nE-Mail: lampe@landkreis
+ restaurant.de\nWeb: www.landkreis-restaurant.de
 X-ALT-DESC;FMTTYPE=text/html:<html><body><p><strong><u>Eintopf</u></stron
  g><br>• Pichelsteiner Gemüseeintopf mit Bockwurst – 6\,00 €<br><b
  r></p><p><strong><u>Hauptgerichte</u></strong><br>• Geb. Schollenfilet
@@ -222,17 +215,14 @@ X-ALT-DESC;FMTTYPE=text/html:<html><body><p><strong><u>Eintopf</u></stron
  ong><br>• Kräuter Kartoffeln – 1\,00 €<br><br></p><p><strong><u>G
  emüsebeilagen</u></strong><br>• Apfelrotkohl – 1\,00 €<br><br></p
  ><p><strong><u>Dessert</u></strong><br>• Tages-Dessert – 1\,20 €<b
- r><br></p><br><p><strong><u>Weitere Informationen</u></strong><br><a hre
- f="https://www.landkreis-restaurant.de/documents/276/Speise34.2026.pdf">
- Speiseplan als PDF</a><br>Öffnungszeiten: Mo–Fr 12:00–13:30 Uhr<br>
- <a href="tel:+495415011064">Telefon: 0541 5011 064</a><br><a href="mailt
- o:lampe@landkreisrestaurant.de">E-Mail: lampe@landkreisrestaurant.de</a>
- </p></body></html>
+ r><br></p><br><p><strong><u>Weitere Informationen</u></strong><br>Öffnu
+ ngszeiten: Mo–Fr 12:00–13:30 Uhr<br><a href="tel:+495415011064">Tele
+ fon: 0541 5011 064</a><br><a href="mailto:lampe@landkreisrestaurant.de">
+ E-Mail: lampe@landkreisrestaurant.de</a><br><a href="https://www.landkre
+ is-restaurant.de">Web: www.landkreis-restaurant.de</a></p></body></html>
 LOCATION:Landkreis Restaurant Osnabrück\, Am Schölerberg 1\, 49082 Osna
  brück\, Deutschland
 URL:https://www.landkreis-restaurant.de/documents/276/Speise34.2026.pdf
-LINK;VALUE=URI;REL=alternate;LABEL="Speiseplan als PDF":https://www.landk
- reis-restaurant.de/documents/276/Speise34.2026.pdf
 TRANSP:TRANSPARENT
 END:VEVENT
 END:VCALENDAR

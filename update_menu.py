@@ -25,7 +25,8 @@ HEADERS = {"Eintopf", "Hauptgerichte", "Beilagen", "Gemüsebeilagen", "Dessert"}
 LOCATION = "Landkreis Restaurant Osnabrück, Am Schölerberg 1, 49082 Osnabrück, Deutschland"
 PHONE = "0541 5011 064"
 EMAIL = "lampe@landkreisrestaurant.de"
-EVENT_SEQUENCE = 4
+WEBSITE = "www.landkreis-restaurant.de"
+EVENT_SEQUENCE = 5
 
 
 def compact(value: str | None) -> str:
@@ -230,18 +231,18 @@ def event_description(menu: dict) -> str:
     return "\n".join(lines)
 
 
-def calendar_description(menu: dict, source_url: str) -> str:
+def calendar_description(menu: dict) -> str:
     return (
         event_description(menu)
         + "\n\n\nWEITERE INFORMATIONEN\n─────────────────────\n"
-        + "Speiseplan als PDF\n"
         + "Öffnungszeiten: Mo–Fr 12:00–13:30 Uhr\n"
         + f"Telefon: {PHONE}\n"
-        + f"E-Mail: {EMAIL}"
+        + f"E-Mail: {EMAIL}\n"
+        + f"Web: {WEBSITE}"
     )
 
 
-def html_description(menu: dict, source_url: str) -> str:
+def html_description(menu: dict) -> str:
     sections = [
         ("Eintopf", menu["soups"]),
         ("Hauptgerichte", menu["mains"] + [
@@ -261,10 +262,10 @@ def html_description(menu: dict, source_url: str) -> str:
         parts.append("</p>")
     parts.append(
         "<br><p><strong><u>Weitere Informationen</u></strong><br>"
-        f'<a href="{html.escape(source_url, quote=True)}">Speiseplan als PDF</a><br>'
         "Öffnungszeiten: Mo–Fr 12:00–13:30 Uhr<br>"
         f'<a href="tel:+495415011064">Telefon: {PHONE}</a><br>'
-        f'<a href="mailto:{EMAIL}">E-Mail: {EMAIL}</a></p>'
+        f'<a href="mailto:{EMAIL}">E-Mail: {EMAIL}</a><br>'
+        f'<a href="https://{WEBSITE}">Web: {WEBSITE}</a></p>'
     )
     parts.append("</body></html>")
     return "".join(parts)
@@ -301,11 +302,10 @@ def render_ics(all_weeks: list[dict]) -> str:
                 f"DTSTART;VALUE=DATE:{start:%Y%m%d}",
                 f"DTEND;VALUE=DATE:{end:%Y%m%d}",
                 f"SUMMARY:{escape_ics(summary)}",
-                f"DESCRIPTION:{escape_ics(calendar_description(menu, data['source_url']))}",
-                f"X-ALT-DESC;FMTTYPE=text/html:{escape_ics(html_description(menu, data['source_url']))}",
+                f"DESCRIPTION:{escape_ics(calendar_description(menu))}",
+                f"X-ALT-DESC;FMTTYPE=text/html:{escape_ics(html_description(menu))}",
                 f"LOCATION:{escape_ics(LOCATION)}",
                 f"URL:{data['source_url']}",
-                f'LINK;VALUE=URI;REL=alternate;LABEL="Speiseplan als PDF":{data["source_url"]}',
                 "TRANSP:TRANSPARENT",
                 "END:VEVENT",
             ]
