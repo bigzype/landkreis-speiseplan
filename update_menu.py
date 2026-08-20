@@ -23,13 +23,11 @@ MONTHS = {
 }
 HEADERS = {"Eintopf", "Hauptgerichte", "Beilagen", "Gemüsebeilagen", "Dessert"}
 LOCATION = "Landkreis Restaurant Osnabrück\nAm Schölerberg 1, 49082 Osnabrück, Deutschland"
-ADDRESS = "Am Schölerberg 1, 49082 Osnabrück, Deutschland"
-APPLE_ADDRESS = r"Am Schölerberg 1\, 49082 Osnabrück\, Deutschland"
-LATITUDE = "52.2476719"
-LONGITUDE = "8.0696554"
+PDF_PUBLIC_URL = "https://bigzype.github.io/landkreis-speiseplan/pdf/"
+ROUTE_PUBLIC_URL = "https://bigzype.github.io/landkreis-speiseplan/route/"
 PHONE = "0541 5011 064"
 EMAIL = "lampe@landkreisrestaurant.de"
-EVENT_SEQUENCE = 2
+EVENT_SEQUENCE = 3
 
 
 def compact(value: str | None) -> str:
@@ -238,7 +236,8 @@ def calendar_description(menu: dict, source_url: str) -> str:
     return (
         event_description(menu)
         + "\n\n\nWEITERE INFORMATIONEN\n─────────────────────\n"
-        + "🔗 Speiseplan als PDF\n"
+        + f"Speiseplan als PDF: {PDF_PUBLIC_URL}\n"
+        + f"Route in Apple Karten: {ROUTE_PUBLIC_URL}\n"
         + "Öffnungszeiten: Mo–Fr 12:00–13:30 Uhr\n"
         + f"Telefon: {PHONE}\n"
         + f"E-Mail: {EMAIL}"
@@ -265,7 +264,8 @@ def html_description(menu: dict, source_url: str) -> str:
         parts.append("</p>")
     parts.append(
         "<br><p><strong><u>Weitere Informationen</u></strong><br>"
-        f'<a href="{html.escape(source_url, quote=True)}">Speiseplan als PDF</a><br>'
+        f'<a href="{PDF_PUBLIC_URL}">Speiseplan als PDF</a><br>'
+        f'<a href="{ROUTE_PUBLIC_URL}">Route in Apple Karten</a><br>'
         "Öffnungszeiten: Mo–Fr 12:00–13:30 Uhr<br>"
         f'<a href="tel:+495415011064">Telefon: {PHONE}</a><br>'
         f'<a href="mailto:{EMAIL}">E-Mail: {EMAIL}</a></p>'
@@ -308,11 +308,7 @@ def render_ics(all_weeks: list[dict]) -> str:
                 f"DESCRIPTION:{escape_ics(calendar_description(menu, data['source_url']))}",
                 f"X-ALT-DESC;FMTTYPE=text/html:{escape_ics(html_description(menu, data['source_url']))}",
                 f"LOCATION:{escape_ics(LOCATION)}",
-                f"GEO:{LATITUDE};{LONGITUDE}",
-                f'X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS="{APPLE_ADDRESS}";'
-                f'X-APPLE-RADIUS=100;X-TITLE=Landkreis Restaurant Osnabrück:'
-                f'geo:{LATITUDE},{LONGITUDE}',
-                f"ATTACH;FMTTYPE=application/pdf:{data['source_url']}",
+                f"URL:{PDF_PUBLIC_URL}",
                 "TRANSP:TRANSPARENT",
                 "END:VEVENT",
             ]
