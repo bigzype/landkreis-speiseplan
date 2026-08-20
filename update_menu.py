@@ -201,21 +201,26 @@ def short_name(text: str) -> str:
 
 
 def event_description(menu: dict) -> str:
-    sections = [
-        ("Eintopf", "soups"),
-        ("Hauptgerichte", "mains"),
-        ("Beilagen", "sides"),
-        ("Gemüsebeilagen", "vegetables"),
-        ("Zum Salat", "salads"),
-        ("Dessert", "desserts"),
-    ]
     lines: list[str] = []
-    for title, key in sections:
-        if menu[key]:
-            if lines:
-                lines.append("")
-            lines.append(title)
-            lines.extend(f"• {priced(item)}" for item in menu[key])
+
+    def section(title: str, items: list[dict], prefix: str = "") -> None:
+        if not items:
+            return
+        if lines:
+            lines.append("")
+        lines.append(title)
+        lines.extend(f"• {prefix}{priced(item)}" for item in items)
+
+    section("Eintopf", menu["soups"])
+    if menu["mains"] or menu["salads"]:
+        if lines:
+            lines.append("")
+        lines.append("Hauptgerichte")
+        lines.extend(f"• {priced(item)}" for item in menu["mains"])
+        lines.extend(f"• Heute zum Salat: {priced(item)}" for item in menu["salads"])
+    section("Beilagen", menu["sides"])
+    section("Gemüsebeilagen", menu["vegetables"])
+    section("Dessert", menu["desserts"])
     return "\n".join(lines)
 
 
