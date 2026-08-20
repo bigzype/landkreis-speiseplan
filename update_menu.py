@@ -22,10 +22,14 @@ MONTHS = {
     "oktober": 10, "november": 11, "dezember": 12,
 }
 HEADERS = {"Eintopf", "Hauptgerichte", "Beilagen", "Gemüsebeilagen", "Dessert"}
-LOCATION = "Landkreis Restaurant Osnabrück, Am Schölerberg 1, 49084 Osnabrück"
+LOCATION = "Landkreis Restaurant Osnabrück\nAm Schölerberg 1, 49082 Osnabrück, Deutschland"
+ADDRESS = "Am Schölerberg 1, 49082 Osnabrück, Deutschland"
+APPLE_ADDRESS = r"Am Schölerberg 1\, 49082 Osnabrück\, Deutschland"
+LATITUDE = "52.2476719"
+LONGITUDE = "8.0696554"
 PHONE = "0541 5011 064"
 EMAIL = "lampe@landkreisrestaurant.de"
-EVENT_SEQUENCE = 1
+EVENT_SEQUENCE = 2
 
 
 def compact(value: str | None) -> str:
@@ -214,7 +218,7 @@ def event_description(menu: dict) -> str:
             lines.append("")
         lines.append(title.upper())
         lines.append("─" * len(title))
-        lines.extend(f"• {prefix}{priced(item)}" for item in items)
+        lines.extend(f"• {prefix}{priced(item)}\n" for item in items)
 
     section("Eintopf", menu["soups"])
     if menu["mains"] or menu["salads"]:
@@ -222,8 +226,8 @@ def event_description(menu: dict) -> str:
             lines.append("")
         lines.append("HAUPTGERICHTE")
         lines.append("─" * len("Hauptgerichte"))
-        lines.extend(f"• {priced(item)}" for item in menu["mains"])
-        lines.extend(f"• Heute zum Salat: {priced(item)}" for item in menu["salads"])
+        lines.extend(f"• {priced(item)}\n" for item in menu["mains"])
+        lines.extend(f"• Heute zum Salat: {priced(item)}\n" for item in menu["salads"])
     section("Beilagen", menu["sides"])
     section("Gemüsebeilagen", menu["vegetables"])
     section("Dessert", menu["desserts"])
@@ -233,8 +237,8 @@ def event_description(menu: dict) -> str:
 def calendar_description(menu: dict, source_url: str) -> str:
     return (
         event_description(menu)
-        + "\n\nWEITERE INFORMATIONEN\n─────────────────────\n"
-        + f"Speiseplan als PDF: {source_url}\n"
+        + "\n\n\nWEITERE INFORMATIONEN\n─────────────────────\n"
+        + "🔗 Speiseplan als PDF\n"
         + "Öffnungszeiten: Mo–Fr 12:00–13:30 Uhr\n"
         + f"Telefon: {PHONE}\n"
         + f"E-Mail: {EMAIL}"
@@ -257,10 +261,10 @@ def html_description(menu: dict, source_url: str) -> str:
         if not items:
             continue
         parts.append(f"<p><strong><u>{html.escape(title)}</u></strong><br>")
-        parts.extend(f"• {html.escape(priced(item))}<br>" for item in items)
+        parts.extend(f"• {html.escape(priced(item))}<br><br>" for item in items)
         parts.append("</p>")
     parts.append(
-        "<p><strong><u>Weitere Informationen</u></strong><br>"
+        "<br><p><strong><u>Weitere Informationen</u></strong><br>"
         f'<a href="{html.escape(source_url, quote=True)}">Speiseplan als PDF</a><br>'
         "Öffnungszeiten: Mo–Fr 12:00–13:30 Uhr<br>"
         f'<a href="tel:+495415011064">Telefon: {PHONE}</a><br>'
@@ -285,16 +289,11 @@ def render_ics(all_weeks: list[dict]) -> str:
         "CALSCALE:GREGORIAN", "METHOD:PUBLISH", "X-WR-CALNAME:Landkreis Speiseplan",
         "X-WR-CALDESC:Wöchentlicher Speiseplan des Landkreis Restaurants Osnabrück",
         "REFRESH-INTERVAL;VALUE=DURATION:PT6H", "X-PUBLISHED-TTL:PT6H",
-        "BEGIN:VTIMEZONE", "TZID:Europe/Berlin", "X-LIC-LOCATION:Europe/Berlin",
-        "BEGIN:DAYLIGHT", "TZOFFSETFROM:+0100", "TZOFFSETTO:+0200", "TZNAME:CEST",
-        "DTSTART:19700329T020000", "RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU", "END:DAYLIGHT",
-        "BEGIN:STANDARD", "TZOFFSETFROM:+0200", "TZOFFSETTO:+0100", "TZNAME:CET",
-        "DTSTART:19701025T030000", "RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU", "END:STANDARD",
-        "END:VTIMEZONE",
     ]
     for data in sorted(all_weeks, key=lambda item: item["week_start"]):
         for menu in data["menus"]:
             start = date.fromisoformat(menu["date"])
+            end = start + timedelta(days=1)
             names = [short_name(item["text"]) for item in menu["mains"][:2]]
             summary = "🍽 " + " · ".join(names)
             dtstamp = datetime.combine(date.fromisoformat(data["week_start"]), datetime.min.time(), tzinfo=timezone.utc)
@@ -303,14 +302,18 @@ def render_ics(all_weeks: list[dict]) -> str:
                 f"UID:landkreis-speiseplan-{start.isoformat()}@pro-mac-support.de",
                 f"SEQUENCE:{EVENT_SEQUENCE}",
                 f"DTSTAMP:{dtstamp:%Y%m%dT%H%M%SZ}",
-                f"DTSTART;TZID=Europe/Berlin:{start:%Y%m%d}T120000",
-                f"DTEND;TZID=Europe/Berlin:{start:%Y%m%d}T133000",
+                f"DTSTART;VALUE=DATE:{start:%Y%m%d}",
+                f"DTEND;VALUE=DATE:{end:%Y%m%d}",
                 f"SUMMARY:{escape_ics(summary)}",
                 f"DESCRIPTION:{escape_ics(calendar_description(menu, data['source_url']))}",
                 f"X-ALT-DESC;FMTTYPE=text/html:{escape_ics(html_description(menu, data['source_url']))}",
                 f"LOCATION:{escape_ics(LOCATION)}",
-                f"URL:{data['source_url']}",
-                "TRANSP:OPAQUE",
+                f"GEO:{LATITUDE};{LONGITUDE}",
+                f'X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS="{APPLE_ADDRESS}";'
+                f'X-APPLE-RADIUS=100;X-TITLE=Landkreis Restaurant Osnabrück:'
+                f'geo:{LATITUDE},{LONGITUDE}',
+                f"ATTACH;FMTTYPE=application/pdf:{data['source_url']}",
+                "TRANSP:TRANSPARENT",
                 "END:VEVENT",
             ]
             lines.extend(event)
