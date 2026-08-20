@@ -22,12 +22,10 @@ MONTHS = {
     "oktober": 10, "november": 11, "dezember": 12,
 }
 HEADERS = {"Eintopf", "Hauptgerichte", "Beilagen", "Gemüsebeilagen", "Dessert"}
-LOCATION = "Landkreis Restaurant Osnabrück\nAm Schölerberg 1, 49082 Osnabrück, Deutschland"
-PDF_PUBLIC_URL = "https://bigzype.github.io/landkreis-speiseplan/pdf/"
-ROUTE_PUBLIC_URL = "https://bigzype.github.io/landkreis-speiseplan/route/"
+LOCATION = "Landkreis Restaurant Osnabrück, Am Schölerberg 1, 49082 Osnabrück, Deutschland"
 PHONE = "0541 5011 064"
 EMAIL = "lampe@landkreisrestaurant.de"
-EVENT_SEQUENCE = 3
+EVENT_SEQUENCE = 4
 
 
 def compact(value: str | None) -> str:
@@ -236,8 +234,7 @@ def calendar_description(menu: dict, source_url: str) -> str:
     return (
         event_description(menu)
         + "\n\n\nWEITERE INFORMATIONEN\n─────────────────────\n"
-        + f"Speiseplan als PDF: {PDF_PUBLIC_URL}\n"
-        + f"Route in Apple Karten: {ROUTE_PUBLIC_URL}\n"
+        + "Speiseplan als PDF\n"
         + "Öffnungszeiten: Mo–Fr 12:00–13:30 Uhr\n"
         + f"Telefon: {PHONE}\n"
         + f"E-Mail: {EMAIL}"
@@ -264,8 +261,7 @@ def html_description(menu: dict, source_url: str) -> str:
         parts.append("</p>")
     parts.append(
         "<br><p><strong><u>Weitere Informationen</u></strong><br>"
-        f'<a href="{PDF_PUBLIC_URL}">Speiseplan als PDF</a><br>'
-        f'<a href="{ROUTE_PUBLIC_URL}">Route in Apple Karten</a><br>'
+        f'<a href="{html.escape(source_url, quote=True)}">Speiseplan als PDF</a><br>'
         "Öffnungszeiten: Mo–Fr 12:00–13:30 Uhr<br>"
         f'<a href="tel:+495415011064">Telefon: {PHONE}</a><br>'
         f'<a href="mailto:{EMAIL}">E-Mail: {EMAIL}</a></p>'
@@ -308,7 +304,8 @@ def render_ics(all_weeks: list[dict]) -> str:
                 f"DESCRIPTION:{escape_ics(calendar_description(menu, data['source_url']))}",
                 f"X-ALT-DESC;FMTTYPE=text/html:{escape_ics(html_description(menu, data['source_url']))}",
                 f"LOCATION:{escape_ics(LOCATION)}",
-                f"URL:{PDF_PUBLIC_URL}",
+                f"URL:{data['source_url']}",
+                f'LINK;VALUE=URI;REL=alternate;LABEL="Speiseplan als PDF":{data["source_url"]}',
                 "TRANSP:TRANSPARENT",
                 "END:VEVENT",
             ]
