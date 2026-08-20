@@ -8,100 +8,240 @@ X-WR-CALDESC:Wöchentlicher Speiseplan des Landkreis Restaurants Osnabrü
  ck
 REFRESH-INTERVAL;VALUE=DURATION:PT6H
 X-PUBLISHED-TTL:PT6H
+BEGIN:VTIMEZONE
+TZID:Europe/Berlin
+X-LIC-LOCATION:Europe/Berlin
+BEGIN:DAYLIGHT
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+TZNAME:CEST
+DTSTART:19700329T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+TZNAME:CET
+DTSTART:19701025T030000
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+END:STANDARD
+END:VTIMEZONE
 BEGIN:VEVENT
 UID:landkreis-speiseplan-2026-08-17@pro-mac-support.de
+SEQUENCE:1
 DTSTAMP:20260817T000000Z
-DTSTART;VALUE=DATE:20260817
-DTEND;VALUE=DATE:20260818
+DTSTART;TZID=Europe/Berlin:20260817T120000
+DTEND;TZID=Europe/Berlin:20260817T133000
 SUMMARY:🍽 Hähnchenbrustfilet · Pasta Funghi
-DESCRIPTION:Eintopf\n• Schnippelbohnen / Kartoffeleintopf mit / ohne Wu
- rst – 6\,00 €\n\nHauptgerichte\n• Hähnchenbrustfilet auf einer Ka
- ramellisierter Ananas und Kokoscurry sauce leicht und bekömmlich – 7\
- ,50 €\n• Pasta Funghi\, mit einem Ragout von Pilzen in Sahnesauce un
- d allerlei Kräutern / wer möchte Parmesan – 7\,50 €\n• Heute zum
-  Salat: einen Salat Wrap – 7\,00 €\n\nBeilagen\n• Dillkartoffeln 
- – 1\,00 €\n• Twister Pommes – 1\,00 €\n\nGemüsebeilagen\n• 
- Honig-Möhrchen – 1\,00 €\n• Mexikogemüse – 1\,20 €\n\nDesser
- t\n• Tages-Dessert – 1\,20 €
-LOCATION:Landkreis Restaurant Osnabrück
+DESCRIPTION:EINTOPF\n───────\n• Schnippelbohnen / Kartoff
+ eleintopf mit / ohne Wurst – 6\,00 €\n\nHAUPTGERICHTE\n────
+ ─────────\n• Hähnchenbrustfilet auf einer Karamelli
+ sierter Ananas und Kokoscurry sauce leicht und bekömmlich – 7\,50 €
+ \n• Pasta Funghi\, mit einem Ragout von Pilzen in Sahnesauce und aller
+ lei Kräutern / wer möchte Parmesan – 7\,50 €\n• Heute zum Salat:
+  einen Salat Wrap – 7\,00 €\n\nBEILAGEN\n────────\n
+ • Dillkartoffeln – 1\,00 €\n• Twister Pommes – 1\,00 €\n\nGE
+ MÜSEBEILAGEN\n──────────────\n• Honig-Mö
+ hrchen – 1\,00 €\n• Mexikogemüse – 1\,20 €\n\nDESSERT\n──
+ ─────\n• Tages-Dessert – 1\,20 €\n\nWEITERE INFORMATIONE
+ N\n─────────────────────\nSpei
+ seplan als PDF: https://www.landkreis-restaurant.de/documents/276/Speise
+ 34.2026.pdf\nÖffnungszeiten: Mo–Fr 12:00–13:30 Uhr\nTelefon: 0541 5
+ 011 064\nE-Mail: lampe@landkreisrestaurant.de
+X-ALT-DESC;FMTTYPE=text/html:<html><body><p><strong><u>Eintopf</u></stron
+ g><br>• Schnippelbohnen / Kartoffeleintopf mit / ohne Wurst – 6\,00 
+ €<br></p><p><strong><u>Hauptgerichte</u></strong><br>• Hähnchenbrus
+ tfilet auf einer Karamellisierter Ananas und Kokoscurry sauce leicht und
+  bekömmlich – 7\,50 €<br>• Pasta Funghi\, mit einem Ragout von Pi
+ lzen in Sahnesauce und allerlei Kräutern / wer möchte Parmesan – 7\,
+ 50 €<br>• Heute zum Salat: einen Salat Wrap – 7\,00 €<br></p><p>
+ <strong><u>Beilagen</u></strong><br>• Dillkartoffeln – 1\,00 €<br>
+ • Twister Pommes – 1\,00 €<br></p><p><strong><u>Gemüsebeilagen</u
+ ></strong><br>• Honig-Möhrchen – 1\,00 €<br>• Mexikogemüse –
+  1\,20 €<br></p><p><strong><u>Dessert</u></strong><br>• Tages-Desser
+ t – 1\,20 €<br></p><p><strong><u>Weitere Informationen</u></strong><
+ br><a href="https://www.landkreis-restaurant.de/documents/276/Speise34.2
+ 026.pdf">Speiseplan als PDF</a><br>Öffnungszeiten: Mo–Fr 12:00–13:3
+ 0 Uhr<br><a href="tel:+495415011064">Telefon: 0541 5011 064</a><br><a hr
+ ef="mailto:lampe@landkreisrestaurant.de">E-Mail: lampe@landkreisrestaura
+ nt.de</a></p></body></html>
+LOCATION:Landkreis Restaurant Osnabrück\, Am Schölerberg 1\, 49084 Osna
+ brück
 URL:https://www.landkreis-restaurant.de/documents/276/Speise34.2026.pdf
-TRANSP:TRANSPARENT
+TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 UID:landkreis-speiseplan-2026-08-18@pro-mac-support.de
+SEQUENCE:1
 DTSTAMP:20260817T000000Z
-DTSTART;VALUE=DATE:20260818
-DTEND;VALUE=DATE:20260819
+DTSTART;TZID=Europe/Berlin:20260818T120000
+DTEND;TZID=Europe/Berlin:20260818T133000
 SUMMARY:🍽 Schlankwelsfilet leicht mehliert · Schweinefiletgeschnetzel
  tes
-DESCRIPTION:Eintopf\n• Wirsing-Kartoffeleintopf Mit / ohne Wurst – 6\
- ,00 €\n\nHauptgerichte\n• Schlankwelsfilet leicht mehliert auf einem
-  Hirtenkäse-Blattspinat angerichtet / Gesund und lecker durch den Diens
- tag. – 7\,50 €\n• Schweinefiletgeschnetzeltes mit Rahmchampignons 
- und Bergkäse gratiniert\, Kräuter dürfen nicht fehlen – 7\,50 €\n
- • Heute zum Salat: Hähnchenbrust in Pesto eingelegt – 7\,00 €\n\n
- Beilagen\n• Paprikareis – 1\,00 €\n• Petersilien-Kartoffeln – 
- 1\,00 €\n\nGemüsebeilagen\n• Brokkoli – 1\,00 €\n• Rosenkohl 
- mit Röstzwiebeln – 1\,00 €\n\nDessert\n• Tages-Dessert – 1\,20 
- €
-LOCATION:Landkreis Restaurant Osnabrück
+DESCRIPTION:EINTOPF\n───────\n• Wirsing-Kartoffeleintopf 
+ Mit / ohne Wurst – 6\,00 €\n\nHAUPTGERICHTE\n───────
+ ──────\n• Schlankwelsfilet leicht mehliert auf einem Hirte
+ nkäse-Blattspinat angerichtet / Gesund und lecker durch den Dienstag. 
+ – 7\,50 €\n• Schweinefiletgeschnetzeltes mit Rahmchampignons und B
+ ergkäse gratiniert\, Kräuter dürfen nicht fehlen – 7\,50 €\n• H
+ eute zum Salat: Hähnchenbrust in Pesto eingelegt – 7\,00 €\n\nBEILA
+ GEN\n────────\n• Paprikareis – 1\,00 €\n• Peters
+ ilien-Kartoffeln – 1\,00 €\n\nGEMÜSEBEILAGEN\n───────
+ ───────\n• Brokkoli – 1\,00 €\n• Rosenkohl mit Rö
+ stzwiebeln – 1\,00 €\n\nDESSERT\n───────\n• Tages-De
+ ssert – 1\,20 €\n\nWEITERE INFORMATIONEN\n────────
+ ─────────────\nSpeiseplan als PDF: https://www
+ .landkreis-restaurant.de/documents/276/Speise34.2026.pdf\nÖffnungszeite
+ n: Mo–Fr 12:00–13:30 Uhr\nTelefon: 0541 5011 064\nE-Mail: lampe@land
+ kreisrestaurant.de
+X-ALT-DESC;FMTTYPE=text/html:<html><body><p><strong><u>Eintopf</u></stron
+ g><br>• Wirsing-Kartoffeleintopf Mit / ohne Wurst – 6\,00 €<br></p
+ ><p><strong><u>Hauptgerichte</u></strong><br>• Schlankwelsfilet leicht
+  mehliert auf einem Hirtenkäse-Blattspinat angerichtet / Gesund und lec
+ ker durch den Dienstag. – 7\,50 €<br>• Schweinefiletgeschnetzeltes
+  mit Rahmchampignons und Bergkäse gratiniert\, Kräuter dürfen nicht f
+ ehlen – 7\,50 €<br>• Heute zum Salat: Hähnchenbrust in Pesto eing
+ elegt – 7\,00 €<br></p><p><strong><u>Beilagen</u></strong><br>• Pa
+ prikareis – 1\,00 €<br>• Petersilien-Kartoffeln – 1\,00 €<br><
+ /p><p><strong><u>Gemüsebeilagen</u></strong><br>• Brokkoli – 1\,00 
+ €<br>• Rosenkohl mit Röstzwiebeln – 1\,00 €<br></p><p><strong><
+ u>Dessert</u></strong><br>• Tages-Dessert – 1\,20 €<br></p><p><str
+ ong><u>Weitere Informationen</u></strong><br><a href="https://www.landkr
+ eis-restaurant.de/documents/276/Speise34.2026.pdf">Speiseplan als PDF</a
+ ><br>Öffnungszeiten: Mo–Fr 12:00–13:30 Uhr<br><a href="tel:+4954150
+ 11064">Telefon: 0541 5011 064</a><br><a href="mailto:lampe@landkreisrest
+ aurant.de">E-Mail: lampe@landkreisrestaurant.de</a></p></body></html>
+LOCATION:Landkreis Restaurant Osnabrück\, Am Schölerberg 1\, 49084 Osna
+ brück
 URL:https://www.landkreis-restaurant.de/documents/276/Speise34.2026.pdf
-TRANSP:TRANSPARENT
+TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 UID:landkreis-speiseplan-2026-08-19@pro-mac-support.de
+SEQUENCE:1
 DTSTAMP:20260817T000000Z
-DTSTART;VALUE=DATE:20260819
-DTEND;VALUE=DATE:20260820
+DTSTART;TZID=Europe/Berlin:20260819T120000
+DTEND;TZID=Europe/Berlin:20260819T133000
 SUMMARY:🍽 Schweineschnitzel · Gemüseragout
-DESCRIPTION:Eintopf\n• Linsen-Kartoffeleintopf mit frischen Liebstöcke
- l „Veggi“ oder mit Mettwurst – 6\,00 €\n\nHauptgerichte\n• Sch
- weineschnitzel “Bayrischer Art “ mit einer Süßen-Senfkruste und Du
- nkelbiersauce – 7\,50 €\n• Gemüseragout mit einem Tofu (mit Sesam
- \, braunem Zucker\, Sojasauce gewürzt\, gebraten) – 7\,50 €\n• He
- ute zum Salat: Frühlingsrolle mit Sweet-Chilisauce – 7\,00 €\n\nBei
- lagen\n• Kartoffel-Kroketten – 1\,00 €\n• Dampfkartoffeln – 1\
- ,00 €\n\nGemüsebeilagen\n• Kaisergemüse – 1\,00 €\n• Kohlrab
- i – 1\,00 €\n\nDessert\n• Tages-Dessert – 1\,20 €
-LOCATION:Landkreis Restaurant Osnabrück
+DESCRIPTION:EINTOPF\n───────\n• Linsen-Kartoffeleintopf m
+ it frischen Liebstöckel „Veggi“ oder mit Mettwurst – 6\,00 €\n\
+ nHAUPTGERICHTE\n─────────────\n• Schweinesch
+ nitzel “Bayrischer Art “ mit einer Süßen-Senfkruste und Dunkelbier
+ sauce – 7\,50 €\n• Gemüseragout mit einem Tofu (mit Sesam\, braun
+ em Zucker\, Sojasauce gewürzt\, gebraten) – 7\,50 €\n• Heute zum 
+ Salat: Frühlingsrolle mit Sweet-Chilisauce – 7\,00 €\n\nBEILAGEN\n
+ ────────\n• Kartoffel-Kroketten – 1\,00 €\n• Dam
+ pfkartoffeln – 1\,00 €\n\nGEMÜSEBEILAGEN\n────────
+ ──────\n• Kaisergemüse – 1\,00 €\n• Kohlrabi – 1\
+ ,00 €\n\nDESSERT\n───────\n• Tages-Dessert – 1\,20 
+ €\n\nWEITERE INFORMATIONEN\n──────────────
+ ───────\nSpeiseplan als PDF: https://www.landkreis-restaur
+ ant.de/documents/276/Speise34.2026.pdf\nÖffnungszeiten: Mo–Fr 12:00
+ –13:30 Uhr\nTelefon: 0541 5011 064\nE-Mail: lampe@landkreisrestaurant.
+ de
+X-ALT-DESC;FMTTYPE=text/html:<html><body><p><strong><u>Eintopf</u></stron
+ g><br>• Linsen-Kartoffeleintopf mit frischen Liebstöckel „Veggi“ 
+ oder mit Mettwurst – 6\,00 €<br></p><p><strong><u>Hauptgerichte</u><
+ /strong><br>• Schweineschnitzel “Bayrischer Art “ mit einer Süße
+ n-Senfkruste und Dunkelbiersauce – 7\,50 €<br>• Gemüseragout mit 
+ einem Tofu (mit Sesam\, braunem Zucker\, Sojasauce gewürzt\, gebraten) 
+ – 7\,50 €<br>• Heute zum Salat: Frühlingsrolle mit Sweet-Chilisau
+ ce – 7\,00 €<br></p><p><strong><u>Beilagen</u></strong><br>• Karto
+ ffel-Kroketten – 1\,00 €<br>• Dampfkartoffeln – 1\,00 €<br></p
+ ><p><strong><u>Gemüsebeilagen</u></strong><br>• Kaisergemüse – 1\,
+ 00 €<br>• Kohlrabi – 1\,00 €<br></p><p><strong><u>Dessert</u></s
+ trong><br>• Tages-Dessert – 1\,20 €<br></p><p><strong><u>Weitere I
+ nformationen</u></strong><br><a href="https://www.landkreis-restaurant.d
+ e/documents/276/Speise34.2026.pdf">Speiseplan als PDF</a><br>Öffnungsze
+ iten: Mo–Fr 12:00–13:30 Uhr<br><a href="tel:+495415011064">Telefon: 
+ 0541 5011 064</a><br><a href="mailto:lampe@landkreisrestaurant.de">E-Mai
+ l: lampe@landkreisrestaurant.de</a></p></body></html>
+LOCATION:Landkreis Restaurant Osnabrück\, Am Schölerberg 1\, 49084 Osna
+ brück
 URL:https://www.landkreis-restaurant.de/documents/276/Speise34.2026.pdf
-TRANSP:TRANSPARENT
+TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 UID:landkreis-speiseplan-2026-08-20@pro-mac-support.de
+SEQUENCE:1
 DTSTAMP:20260817T000000Z
-DTSTART;VALUE=DATE:20260820
-DTEND;VALUE=DATE:20260821
+DTSTART;TZID=Europe/Berlin:20260820T120000
+DTEND;TZID=Europe/Berlin:20260820T133000
 SUMMARY:🍽 Geschmorte Rinderroulade Oma Röschens Art · Ein Italienisc
  hes Spargel Cordon bleu Spargel in Käse Schinken gerollt
-DESCRIPTION:Eintopf\n• Karotten-Kartoffeleintopf mit Bockwurst – 6\,0
- 0 €\n\nHauptgerichte\n• Geschmorte Rinderroulade Oma Röschens Art
- “ mit Gewürzgurke\, Speck\, Zwiebelfüllung und einer sauce Robert 
- – 8\,00 €\n• Ein Italienisches Spargel Cordon bleu Spargel in Käs
- e Schinken gerollt und in einer Parmesanhülle gebraten – 7\,50 €\n
- • Heute zum Salat: eine Frikadelle mit Mostrich – 7\,00 €\n\nBeila
- gen\n• Schnittlauch-Kartoffeln – 1\,00 €\n• Kartoffelröster –
-  1\,00 €\n\nGemüsebeilagen\n• Preiselbeer-rotkohl – 1\,00 €\n
- • Feine Erbsen – 1\,00 €\n\nDessert\n• Tages-Dessert – 1\,20 
- €
-LOCATION:Landkreis Restaurant Osnabrück
+DESCRIPTION:EINTOPF\n───────\n• Karotten-Kartoffeleintopf
+  mit Bockwurst – 6\,00 €\n\nHAUPTGERICHTE\n────────
+ ─────\n• Geschmorte Rinderroulade Oma Röschens Art“ mit G
+ ewürzgurke\, Speck\, Zwiebelfüllung und einer sauce Robert – 8\,00 
+ €\n• Ein Italienisches Spargel Cordon bleu Spargel in Käse Schinken
+  gerollt und in einer Parmesanhülle gebraten – 7\,50 €\n• Heute z
+ um Salat: eine Frikadelle mit Mostrich – 7\,00 €\n\nBEILAGEN\n──
+ ──────\n• Schnittlauch-Kartoffeln – 1\,00 €\n• Karto
+ ffelröster – 1\,00 €\n\nGEMÜSEBEILAGEN\n────────
+ ──────\n• Preiselbeer-rotkohl – 1\,00 €\n• Feine Erb
+ sen – 1\,00 €\n\nDESSERT\n───────\n• Tages-Dessert 
+ – 1\,20 €\n\nWEITERE INFORMATIONEN\n──────────
+ ───────────\nSpeiseplan als PDF: https://www.landk
+ reis-restaurant.de/documents/276/Speise34.2026.pdf\nÖffnungszeiten: Mo
+ –Fr 12:00–13:30 Uhr\nTelefon: 0541 5011 064\nE-Mail: lampe@landkreis
+ restaurant.de
+X-ALT-DESC;FMTTYPE=text/html:<html><body><p><strong><u>Eintopf</u></stron
+ g><br>• Karotten-Kartoffeleintopf mit Bockwurst – 6\,00 €<br></p><
+ p><strong><u>Hauptgerichte</u></strong><br>• Geschmorte Rinderroulade 
+ Oma Röschens Art“ mit Gewürzgurke\, Speck\, Zwiebelfüllung und eine
+ r sauce Robert – 8\,00 €<br>• Ein Italienisches Spargel Cordon ble
+ u Spargel in Käse Schinken gerollt und in einer Parmesanhülle gebraten
+  – 7\,50 €<br>• Heute zum Salat: eine Frikadelle mit Mostrich – 
+ 7\,00 €<br></p><p><strong><u>Beilagen</u></strong><br>• Schnittlauch
+ -Kartoffeln – 1\,00 €<br>• Kartoffelröster – 1\,00 €<br></p><
+ p><strong><u>Gemüsebeilagen</u></strong><br>• Preiselbeer-rotkohl –
+  1\,00 €<br>• Feine Erbsen – 1\,00 €<br></p><p><strong><u>Desser
+ t</u></strong><br>• Tages-Dessert – 1\,20 €<br></p><p><strong><u>W
+ eitere Informationen</u></strong><br><a href="https://www.landkreis-rest
+ aurant.de/documents/276/Speise34.2026.pdf">Speiseplan als PDF</a><br>Öf
+ fnungszeiten: Mo–Fr 12:00–13:30 Uhr<br><a href="tel:+495415011064">T
+ elefon: 0541 5011 064</a><br><a href="mailto:lampe@landkreisrestaurant.d
+ e">E-Mail: lampe@landkreisrestaurant.de</a></p></body></html>
+LOCATION:Landkreis Restaurant Osnabrück\, Am Schölerberg 1\, 49084 Osna
+ brück
 URL:https://www.landkreis-restaurant.de/documents/276/Speise34.2026.pdf
-TRANSP:TRANSPARENT
+TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 UID:landkreis-speiseplan-2026-08-21@pro-mac-support.de
+SEQUENCE:1
 DTSTAMP:20260817T000000Z
-DTSTART;VALUE=DATE:20260821
-DTEND;VALUE=DATE:20260822
+DTSTART;TZID=Europe/Berlin:20260821T120000
+DTEND;TZID=Europe/Berlin:20260821T133000
 SUMMARY:🍽 Geb. Schollenfilet · Überraschnungsgericht
-DESCRIPTION:Eintopf\n• Pichelsteiner Gemüseeintopf mit Bockwurst – 6
- \,00 €\n\nHauptgerichte\n• Geb. Schollenfilet mit einer Dill-Weißwe
- insauce / Freitag ist Fischtag – 7\,50 €\n• Überraschnungsgericht
- \n\nBeilagen\n• Kräuter Kartoffeln – 1\,00 €\n\nGemüsebeilagen\n
- • Apfelrotkohl – 1\,00 €\n\nDessert\n• Tages-Dessert – 1\,20 
- €
-LOCATION:Landkreis Restaurant Osnabrück
+DESCRIPTION:EINTOPF\n───────\n• Pichelsteiner Gemüseeint
+ opf mit Bockwurst – 6\,00 €\n\nHAUPTGERICHTE\n───────
+ ──────\n• Geb. Schollenfilet mit einer Dill-Weißweinsauce
+  / Freitag ist Fischtag – 7\,50 €\n• Überraschnungsgericht\n\nBEI
+ LAGEN\n────────\n• Kräuter Kartoffeln – 1\,00 €\n
+ \nGEMÜSEBEILAGEN\n──────────────\n• Apfel
+ rotkohl – 1\,00 €\n\nDESSERT\n───────\n• Tages-Desse
+ rt – 1\,20 €\n\nWEITERE INFORMATIONEN\n─────────
+ ────────────\nSpeiseplan als PDF: https://www.la
+ ndkreis-restaurant.de/documents/276/Speise34.2026.pdf\nÖffnungszeiten: 
+ Mo–Fr 12:00–13:30 Uhr\nTelefon: 0541 5011 064\nE-Mail: lampe@landkre
+ isrestaurant.de
+X-ALT-DESC;FMTTYPE=text/html:<html><body><p><strong><u>Eintopf</u></stron
+ g><br>• Pichelsteiner Gemüseeintopf mit Bockwurst – 6\,00 €<br></
+ p><p><strong><u>Hauptgerichte</u></strong><br>• Geb. Schollenfilet mit
+  einer Dill-Weißweinsauce / Freitag ist Fischtag – 7\,50 €<br>• 
+ Überraschnungsgericht<br></p><p><strong><u>Beilagen</u></strong><br>•
+  Kräuter Kartoffeln – 1\,00 €<br></p><p><strong><u>Gemüsebeilagen<
+ /u></strong><br>• Apfelrotkohl – 1\,00 €<br></p><p><strong><u>Dess
+ ert</u></strong><br>• Tages-Dessert – 1\,20 €<br></p><p><strong><u
+ >Weitere Informationen</u></strong><br><a href="https://www.landkreis-re
+ staurant.de/documents/276/Speise34.2026.pdf">Speiseplan als PDF</a><br>
+ Öffnungszeiten: Mo–Fr 12:00–13:30 Uhr<br><a href="tel:+495415011064
+ ">Telefon: 0541 5011 064</a><br><a href="mailto:lampe@landkreisrestauran
+ t.de">E-Mail: lampe@landkreisrestaurant.de</a></p></body></html>
+LOCATION:Landkreis Restaurant Osnabrück\, Am Schölerberg 1\, 49084 Osna
+ brück
 URL:https://www.landkreis-restaurant.de/documents/276/Speise34.2026.pdf
-TRANSP:TRANSPARENT
+TRANSP:OPAQUE
 END:VEVENT
 END:VCALENDAR
