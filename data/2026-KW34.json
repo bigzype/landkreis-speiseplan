@@ -1,0 +1,254 @@
+{
+  "week": "2026-KW34",
+  "week_start": "2026-08-17",
+  "source_url": "https://www.landkreis-restaurant.de/documents/276/Speise34.2026.pdf",
+  "menus": [
+    {
+      "day": "Montag",
+      "date": "2026-08-17",
+      "soups": [
+        {
+          "text": "Schnippelbohnen / Kartoffeleintopf mit / ohne Wurst",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Hähnchenbrustfilet auf einer Karamellisierter Ananas und Kokoscurry sauce leicht und bekömmlich",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Pasta Funghi, mit einem Ragout von Pilzen in Sahnesauce und allerlei Kräutern / wer möchte Parmesan",
+          "price": "7,50 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Dillkartoffeln",
+          "price": "1,00 €"
+        },
+        {
+          "text": "Twister Pommes",
+          "price": "1,00 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Honig-Möhrchen",
+          "price": "1,00 €"
+        },
+        {
+          "text": "Mexikogemüse",
+          "price": "1,20 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-Dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": [
+        {
+          "text": "einen Salat Wrap",
+          "price": "7,00 €"
+        }
+      ]
+    },
+    {
+      "day": "Dienstag",
+      "date": "2026-08-18",
+      "soups": [
+        {
+          "text": "Wirsing-Kartoffeleintopf Mit / ohne Wurst",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Schlankwelsfilet leicht mehliert auf einem Hirtenkäse-Blattspinat angerichtet / Gesund und lecker durch den Dienstag.",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Schweinefiletgeschnetzeltes mit Rahmchampignons und Bergkäse gratiniert, Kräuter dürfen nicht fehlen",
+          "price": "7,50 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Paprikareis",
+          "price": "1,00 €"
+        },
+        {
+          "text": "Petersilien-Kartoffeln",
+          "price": "1,00 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Brokkoli",
+          "price": "1,00 €"
+        },
+        {
+          "text": "Rosenkohl mit Röstzwiebeln",
+          "price": "1,00 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-Dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": [
+        {
+          "text": "Hähnchenbrust in Pesto eingelegt",
+          "price": "7,00 €"
+        }
+      ]
+    },
+    {
+      "day": "Mittwoch",
+      "date": "2026-08-19",
+      "soups": [
+        {
+          "text": "Linsen-Kartoffeleintopf mit frischen Liebstöckel „Veggi“ oder mit Mettwurst",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Schweineschnitzel “Bayrischer Art “ mit einer Süßen-Senfkruste und Dunkelbiersauce",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Gemüseragout mit einem Tofu (mit Sesam, braunem Zucker, Sojasauce gewürzt, gebraten)",
+          "price": "7,50 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Kartoffel-Kroketten",
+          "price": "1,00 €"
+        },
+        {
+          "text": "Dampfkartoffeln",
+          "price": "1,00 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Kaisergemüse",
+          "price": "1,00 €"
+        },
+        {
+          "text": "Kohlrabi",
+          "price": "1,00 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-Dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": [
+        {
+          "text": "Frühlingsrolle mit Sweet-Chilisauce",
+          "price": "7,00 €"
+        }
+      ]
+    },
+    {
+      "day": "Donnerstag",
+      "date": "2026-08-20",
+      "soups": [
+        {
+          "text": "Karotten-Kartoffeleintopf mit Bockwurst",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Geschmorte Rinderroulade Oma Röschens Art“ mit Gewürzgurke, Speck, Zwiebelfüllung und einer sauce Robert",
+          "price": "8,00 €"
+        },
+        {
+          "text": "Ein Italienisches Spargel Cordon bleu Spargel in Käse Schinken gerollt und in einer Parmesanhülle gebraten",
+          "price": "7,50 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Schnittlauch-Kartoffeln",
+          "price": "1,00 €"
+        },
+        {
+          "text": "Kartoffelröster",
+          "price": "1,00 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Preiselbeer-rotkohl",
+          "price": "1,00 €"
+        },
+        {
+          "text": "Feine Erbsen",
+          "price": "1,00 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-Dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": [
+        {
+          "text": "eine Frikadelle mit Mostrich",
+          "price": "7,00 €"
+        }
+      ]
+    },
+    {
+      "day": "Freitag",
+      "date": "2026-08-21",
+      "soups": [
+        {
+          "text": "Pichelsteiner Gemüseeintopf mit Bockwurst",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Geb. Schollenfilet mit einer Dill-Weißweinsauce / Freitag ist Fischtag",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Überraschnungsgericht",
+          "price": ""
+        }
+      ],
+      "sides": [
+        {
+          "text": "Kräuter Kartoffeln",
+          "price": "1,00 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Apfelrotkohl",
+          "price": "1,00 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-Dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": []
+    }
+  ]
+}

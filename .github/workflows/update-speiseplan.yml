@@ -1,0 +1,59 @@
+name: Speiseplan aktualisieren
+
+on:
+  schedule:
+    # 11 Uhr Europe/Berlin: beide UTC-Zeiten wegen Sommer-/Winterzeit.
+    - cron: "0 9 * * 1"
+    - cron: "0 10 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: speiseplan-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Richtige Ortszeit prüfen
+        id: timecheck
+        run: |
+          if test "${{ github.event_name }}" = "workflow_dispatch" || test "$(TZ=Europe/Berlin date +%H)" = "11"; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "Dieser UTC-Lauf entspricht nicht 11 Uhr in Europe/Berlin."
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.timecheck.outputs.run == 'true'
+
+      - uses: actions/setup-python@v5
+        if: steps.timecheck.outputs.run == 'true'
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Abhängigkeiten installieren
+        if: steps.timecheck.outputs.run == 'true'
+        run: pip install -r requirements.txt
+
+      - name: Speiseplan und Kalender aktualisieren
+        if: steps.timecheck.outputs.run == 'true'
+        run: python update_menu.py
+
+      - name: Änderungen veröffentlichen
+        if: steps.timecheck.outputs.run == 'true'
+        run: |
+          if git diff --quiet && test -z "$(git status --porcelain)"; then
+            echo "Keine Änderung."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Speiseplan.pdf speiseplan.ics speiseplan.txt data/ pdf/
+          git commit -m "chore: Speiseplan aktualisieren"
+          git push
