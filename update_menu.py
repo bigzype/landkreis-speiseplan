@@ -47,7 +47,8 @@ def clean_text(value: str | None) -> str:
     )
     text = re.sub(r"\s+[A-Z]$", "", text)
     text = re.sub(r"\bP\b", " ", text)
-    text = re.sub(r"(?<=[a-zäöüß])A\b", "", text)
+    text = re.sub(r"(?<=[a-zäöüß])[A-R]\b", "", text)
+    text = re.sub(r"[\ue000-\uf8ff]", "", text)
     text = re.sub(r",{2,}", ",", text)
     text = re.sub(r",(?=\S)", ", ", text)
     text = re.sub(r"\s+([,.;:/])", r"\1", text)
@@ -85,7 +86,7 @@ def detect_day(cell: str | None) -> str | None:
 
 def parse_period(text: str) -> date:
     match = re.search(
-        r"Zeitraum\s+(\d{1,2})\.\s*([A-Za-zÄÖÜäöüß]+)\s+bis\s+(?:zum\s+)?(\d{1,2})\.\s*([A-Za-zÄÖÜäöüß]+)\s+(\d{4})",
+        r"Zeitraum\s*:?\s*(\d{1,2})\.?\s*([A-Za-zÄÖÜäöüß]+)\s+bis\s+(?:(?:zu|zum)\s+)?(\d{1,2})\.?\s*([A-Za-zÄÖÜäöüß]+)\.?\s+(\d{4})",
         text, re.IGNORECASE,
     )
     if not match:
@@ -125,10 +126,40 @@ def parse_pdf(pdf_path: Path, source_url: str) -> dict:
     if not table:
         raise RuntimeError("Menü-Tabelle im PDF nicht gefunden")
 
+    header = next(row for row in table if row and "Hauptgerichte" in compact(" ".join(x or "" for x in row)))
+    normalized_header = [re.sub(r"[^a-zäöüß]", "", (cell or "").lower()) for cell in header]
+
+    def header_index(predicate, label: str) -> int:
+        match = next((index for index, value in enumerate(normalized_header) if predicate(value)), None)
+        if match is None:
+            raise RuntimeError(f"Spalte {label} im PDF nicht gefunden")
+        return match
+
+    soup_col = header_index(lambda value: value == "eintopf", "Eintopf")
+    main_col = header_index(lambda value: value == "hauptgerichte", "Hauptgerichte")
+    side_col = header_index(lambda value: value.endswith("beilagen") and "gemüse" not in value, "Beilagen")
+    vegetable_col = header_index(lambda value: "gemüsebeilagen" in value, "Gemüsebeilagen")
+    dessert_col = header_index(lambda value: value == "dessert", "Dessert")
+    category_cols = [soup_col, main_col, side_col, vegetable_col, dessert_col]
+
+    def price_column(category_col: int) -> int:
+        next_category = next((index for index in category_cols if index > category_col), len(header))
+        match = next((index for index in range(category_col + 1, next_category) if compact(header[index]) == "€"), None)
+        if match is None:
+            raise RuntimeError(f"Preisspalte nach PDF-Spalte {category_col} nicht gefunden")
+        return match
+
+    soup_price_col = price_column(soup_col)
+    main_price_col = price_column(main_col)
+    side_price_col = price_column(side_col)
+    vegetable_price_col = price_column(vegetable_col)
+    dessert_price_col = price_column(dessert_col)
+    max_col = max(dessert_col, dessert_price_col)
+
     menus: list[dict] = []
     current: dict | None = None
     for raw_row in table:
-        row = (raw_row + [None] * 14)[:14]
+        row = (raw_row + [None] * (max_col + 1))[:max_col + 1]
         day_name = detect_day(row[0])
         if day_name:
             current = {
@@ -141,7 +172,7 @@ def parse_pdf(pdf_path: Path, source_url: str) -> dict:
         if not current:
             continue
 
-        main_text = "\n".join(x or "" for x in row[3:7]).strip()
+        main_text = "\n".join(x or "" for x in row[main_col:main_price_col]).strip()
         # In manchen PDFs rutscht „Wrap/Warp + Allergene“ optisch in die erste
         # Zeile des Folgetags. Der Text gehört noch zum Salat des Vortags.
         if day_name and len(menus) > 1:
@@ -152,16 +183,20 @@ def parse_pdf(pdf_path: Path, source_url: str) -> dict:
                     previous["salads"][-1]["text"] += " " + clean_text(parts[0])
                 main_text = "\n".join(parts[1:])
 
-        add_item(current, "soups", row[1], row[2])
+        add_item(current, "soups", row[soup_col], row[soup_price_col])
         if main_text.lower().startswith("heute zum salat:"):
-            add_item(current, "salads", re.sub(r"^Heute zum Salat:\s*", "", main_text, flags=re.I), row[7])
+            add_item(current, "salads", re.sub(r"^Heute zum Salat:\s*", "", main_text, flags=re.I), row[main_price_col])
         else:
-            add_item(current, "mains", main_text, row[7])
-        add_item(current, "sides", row[8], row[9])
-        vegetable = clean_text(row[10])
+            add_item(current, "mains", main_text, row[main_price_col])
+        add_item(current, "sides", row[side_col], row[side_price_col])
+        vegetable = clean_text(row[vegetable_col])
         if vegetable and vegetable.lower() != "tagessalat":
-            add_item(current, "vegetables", vegetable, row[11])
-        add_item(current, "desserts", row[12], row[13])
+            add_item(current, "vegetables", vegetable, row[vegetable_price_col])
+        add_item(current, "desserts", row[dessert_col], row[dessert_price_col])
+        if current["day"] == "Freitag" and "mit wurst" in compact(row[0]).lower() and current["soups"]:
+            soup = current["soups"][-1]["text"]
+            if "wurst" not in soup.lower():
+                current["soups"][-1]["text"] = soup + " mit Wurst"
 
     if [m["day"] for m in menus] != DAYS:
         raise RuntimeError(f"Erwartet Mo–Fr, erkannt: {[m['day'] for m in menus]}")
@@ -231,18 +266,19 @@ def event_description(menu: dict) -> str:
     return "\n".join(lines)
 
 
-def calendar_description(menu: dict) -> str:
+def calendar_description(menu: dict, source_url: str) -> str:
     return (
         event_description(menu)
         + "\n\n\nWEITERE INFORMATIONEN\n─────────────────────\n"
-        + "Öffnungszeiten: Mo–Fr 12:00–13:30 Uhr\n"
+        + "Öffnungszeiten: Mo–Fr 12:00–13:45 Uhr\n"
         + f"Telefon: {PHONE}\n"
         + f"E-Mail: {EMAIL}\n"
-        + f"Web: {WEBSITE}"
+        + f"Web: {WEBSITE}\n"
+        + f"Quelle: {source_url}"
     )
 
 
-def html_description(menu: dict) -> str:
+def html_description(menu: dict, source_url: str) -> str:
     sections = [
         ("Eintopf", menu["soups"]),
         ("Hauptgerichte", menu["mains"] + [
@@ -262,10 +298,11 @@ def html_description(menu: dict) -> str:
         parts.append("</p>")
     parts.append(
         "<br><p><strong><u>Weitere Informationen</u></strong><br>"
-        "Öffnungszeiten: Mo–Fr 12:00–13:30 Uhr<br>"
+        "Öffnungszeiten: Mo–Fr 12:00–13:45 Uhr<br>"
         f'<a href="tel:+495415011064">Telefon: {PHONE}</a><br>'
         f'<a href="mailto:{EMAIL}">E-Mail: {EMAIL}</a><br>'
-        f'<a href="https://{WEBSITE}">Web: {WEBSITE}</a></p>'
+        f'<a href="https://{WEBSITE}">Web: {WEBSITE}</a><br>'
+        f'<a href="{html.escape(source_url)}">PDF-Speiseplan</a></p>'
     )
     parts.append("</body></html>")
     return "".join(parts)
@@ -286,11 +323,16 @@ def render_ics(all_weeks: list[dict]) -> str:
         "CALSCALE:GREGORIAN", "METHOD:PUBLISH", "X-WR-CALNAME:Landkreis Speiseplan",
         "X-WR-CALDESC:Wöchentlicher Speiseplan des Landkreis Restaurants Osnabrück",
         "REFRESH-INTERVAL;VALUE=DURATION:PT6H", "X-PUBLISHED-TTL:PT6H",
+        "BEGIN:VTIMEZONE", "TZID:Europe/Berlin", "X-LIC-LOCATION:Europe/Berlin",
+        "BEGIN:DAYLIGHT", "TZOFFSETFROM:+0100", "TZOFFSETTO:+0200", "TZNAME:CEST",
+        "DTSTART:19700329T020000", "RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU", "END:DAYLIGHT",
+        "BEGIN:STANDARD", "TZOFFSETFROM:+0200", "TZOFFSETTO:+0100", "TZNAME:CET",
+        "DTSTART:19701025T030000", "RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU", "END:STANDARD",
+        "END:VTIMEZONE",
     ]
     for data in sorted(all_weeks, key=lambda item: item["week_start"]):
         for menu in data["menus"]:
             start = date.fromisoformat(menu["date"])
-            end = start + timedelta(days=1)
             names = [short_name(item["text"]) for item in menu["mains"][:2]]
             summary = "🍽 " + " · ".join(names)
             dtstamp = datetime.combine(date.fromisoformat(data["week_start"]), datetime.min.time(), tzinfo=timezone.utc)
@@ -299,14 +341,14 @@ def render_ics(all_weeks: list[dict]) -> str:
                 f"UID:landkreis-speiseplan-{start.isoformat()}@pro-mac-support.de",
                 f"SEQUENCE:{EVENT_SEQUENCE}",
                 f"DTSTAMP:{dtstamp:%Y%m%dT%H%M%SZ}",
-                f"DTSTART;VALUE=DATE:{start:%Y%m%d}",
-                f"DTEND;VALUE=DATE:{end:%Y%m%d}",
+                f"DTSTART;TZID=Europe/Berlin:{start:%Y%m%d}T120000",
+                f"DTEND;TZID=Europe/Berlin:{start:%Y%m%d}T134500",
                 f"SUMMARY:{escape_ics(summary)}",
-                f"DESCRIPTION:{escape_ics(calendar_description(menu))}",
-                f"X-ALT-DESC;FMTTYPE=text/html:{escape_ics(html_description(menu))}",
+                "DESCRIPTION:" + escape_ics(calendar_description(menu, data["source_url"])),
+                f"X-ALT-DESC;FMTTYPE=text/html:{escape_ics(html_description(menu, data['source_url']))}",
                 f"LOCATION:{escape_ics(LOCATION)}",
                 f"URL:{data['source_url']}",
-                "TRANSP:TRANSPARENT",
+                "TRANSP:OPAQUE",
                 "END:VEVENT",
             ]
             lines.extend(event)
@@ -357,9 +399,10 @@ def main() -> int:
     (root / "Speiseplan.pdf").write_bytes(pdf_path.read_bytes())
     (root / "speiseplan.txt").write_text(render_overview(data), encoding="utf-8")
 
-    all_weeks = [json.loads(path.read_text(encoding="utf-8")) for path in sorted((root / "data").glob("*.json"))]
-    ics = render_ics(all_weeks)
-    validate_ics(ics, sum(len(week["menus"]) for week in all_weeks))
+    # Der abonnierbare Feed enthält ausschließlich die aktuelle Woche. Archivdaten
+    # bleiben als JSON erhalten, dürfen aber keine veralteten Termine im Live-Feed erzeugen.
+    ics = render_ics([data])
+    validate_ics(ics, len(data["menus"]))
     (root / "speiseplan.ics").write_bytes(ics.encode("utf-8"))
     print(render_overview(data), end="")
     print(f"\nQuelle: {source_url}")

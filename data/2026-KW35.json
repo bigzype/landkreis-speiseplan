@@ -1,0 +1,254 @@
+{
+  "week": "2026-KW35",
+  "week_start": "2026-08-24",
+  "source_url": "https://www.landkreis-restaurant.de/documents/277/Speise35.2026.pdf",
+  "menus": [
+    {
+      "day": "Montag",
+      "date": "2026-08-24",
+      "soups": [
+        {
+          "text": "Hochzeitssuppe, Rinderbrühe mit reichlich Einlage – 6,00 €",
+          "price": ""
+        }
+      ],
+      "mains": [
+        {
+          "text": "Pasta a la Carbonara mit Schinken, Ei, Kräutern und Parmesan (auch vegetarisch) – 7,50 €",
+          "price": ""
+        },
+        {
+          "text": "Griechisches Gyrosgeschnetzeltes mit Mais, Kidneybohnen, Delikatessbohnen und Gouda gratiniert – 7,50 €",
+          "price": ""
+        }
+      ],
+      "sides": [
+        {
+          "text": "Kartoffel-Röstinchen – 1,00 €",
+          "price": ""
+        },
+        {
+          "text": "Butterkartoffeln – 1,00 €",
+          "price": ""
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Rahm-Erbsen – 1,00 €",
+          "price": ""
+        },
+        {
+          "text": "Zwiebel-Speckbohnen – 1,20 €",
+          "price": ""
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tagesdessert – 1,20 €",
+          "price": ""
+        }
+      ],
+      "salads": [
+        {
+          "text": "Blumenkohl-Käseschnitzel – 7,00 €",
+          "price": ""
+        }
+      ]
+    },
+    {
+      "day": "Dienstag",
+      "date": "2026-08-25",
+      "soups": [
+        {
+          "text": "Grüner Bohneneintopf mit Bock- oder Mettwurst – 6,00 €",
+          "price": ""
+        }
+      ],
+      "mains": [
+        {
+          "text": "Gebratenes Hähnchenschnitzel mit Mango-Hollandaise – 7,50 €",
+          "price": ""
+        },
+        {
+          "text": "Mehliertes Fischfilet in Basilikumkruste mit Honig-Dillsenfsauce – 7,50 €",
+          "price": ""
+        }
+      ],
+      "sides": [
+        {
+          "text": "Mandarinen-Reis – 1,00 €",
+          "price": ""
+        },
+        {
+          "text": "Kräuterkartoffeln – 1,00 €",
+          "price": ""
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Brokkoli – 1,00 €",
+          "price": ""
+        },
+        {
+          "text": "Rahmspinat – 1,00 €",
+          "price": ""
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tagesdessert – 1,20 €",
+          "price": ""
+        }
+      ],
+      "salads": [
+        {
+          "text": "Leberkäse mit blonden Zwiebeln – 7,00 €",
+          "price": ""
+        }
+      ]
+    },
+    {
+      "day": "Mittwoch",
+      "date": "2026-08-26",
+      "soups": [
+        {
+          "text": "Hausmacher Gulaschsuppe mit Pilzen, Paprika und leichter Würze – 6,00 €",
+          "price": ""
+        }
+      ],
+      "mains": [
+        {
+          "text": "Schweineschnitzel mit Tomaten-Kräuter-Sugo und jungem Gouda gratiniert – 8,50 €",
+          "price": ""
+        },
+        {
+          "text": "Gnocchipfanne mit allerlei Gemüse, Sauce Choron (tomatisierte Hollandaise) und Kräutercroutons – 7,50 €",
+          "price": ""
+        }
+      ],
+      "sides": [
+        {
+          "text": "Röstkartoffeln – 1,00 €",
+          "price": ""
+        },
+        {
+          "text": "Schwenkkartoffeln – 1,00 €",
+          "price": ""
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Blumenkohl in Hollandaise – 1,00 €",
+          "price": ""
+        },
+        {
+          "text": "Kohlrabi in Rahm – 1,00 €",
+          "price": ""
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tagesdessert – 1,20 €",
+          "price": ""
+        }
+      ],
+      "salads": [
+        {
+          "text": "Hähnchenschnitzel mit Ananas – 7,00 €",
+          "price": ""
+        }
+      ]
+    },
+    {
+      "day": "Donnerstag",
+      "date": "2026-08-27",
+      "soups": [
+        {
+          "text": "Erbseneintopf mit Bock- oder Mettwurst – 6,00 €",
+          "price": ""
+        }
+      ],
+      "mains": [
+        {
+          "text": "Rindergeschnetzeltes „Stroganoff“ mit Roter Bete, Gewürzgurke, Pilzen und einem Schuss Wodka – 7,50 €",
+          "price": ""
+        },
+        {
+          "text": "Spinatklöße mit Pfifferlingen in Kräuter-Frischkäse-Rahm – 7,50 €",
+          "price": ""
+        }
+      ],
+      "sides": [
+        {
+          "text": "Paprikareis – 1,00 €",
+          "price": ""
+        },
+        {
+          "text": "Kräuterkartoffeln – 1,00 €",
+          "price": ""
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Preiselbeer-Rotkohl – 1,00 €",
+          "price": ""
+        },
+        {
+          "text": "Brüsseler Rosenkohl – 1,00 €",
+          "price": ""
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tagesdessert – 1,20 €",
+          "price": ""
+        }
+      ],
+      "salads": [
+        {
+          "text": "Matjesfilet Hausfrauen Art – 7,00 €",
+          "price": ""
+        }
+      ]
+    },
+    {
+      "day": "Freitag",
+      "date": "2026-08-28",
+      "soups": [
+        {
+          "text": "Osnabrücker Gemüseeintopf mit Wurst – 6,00 €",
+          "price": ""
+        }
+      ],
+      "mains": [
+        {
+          "text": "Gebackenes Fischfilet mit Frankfurter Sauce (kalte Kräutersauce, auch mit Kerbel) – 7,50 €",
+          "price": ""
+        },
+        {
+          "text": "Überraschungsgericht",
+          "price": ""
+        }
+      ],
+      "sides": [
+        {
+          "text": "Dampfkartoffeln – 1,00 €",
+          "price": ""
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Blumenkohlgemüse mit Hollandaise – 1,00 €",
+          "price": ""
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tagesdessert – 1,20 €",
+          "price": ""
+        }
+      ],
+      "salads": []
+    }
+  ]
+}
