@@ -38,6 +38,9 @@ def clean_text(value: str | None) -> str:
     text = re.sub(r"(?<=\w)-\s*\n\s*(?=\w)", "-", text)
     text = re.sub(r"(?<=\w)\s*\n\s*([a-zäöüß])(?=\s|$)", r"\1", text)
     text = compact(text)
+    # In fehlerhaften PDF-Exporten klebt der letzte Allergencode direkt am
+    # folgenden Wort (z. B. A,C,F,LSchmand).
+    text = re.sub(r"(?<!\w)(?:[A-R],){1,}[A-R](?=[A-ZÄÖÜ][a-zäöüß])", " ", text)
     # Die einzelnen Großbuchstaben sind die Allergen-/Zusatzstoff-Codes. Ein optionales
     # Schlusskomma gehört ebenfalls zum Codeblock, nicht zum Gericht.
     text = re.sub(
@@ -119,7 +122,10 @@ def add_item(day: dict, category: str, text: str | None, price: str | None) -> N
 def parse_pdf(pdf_path: Path, source_url: str) -> dict:
     with pdfplumber.open(pdf_path) as pdf:
         page_text = "\n".join(page.extract_text() or "" for page in pdf.pages)
-        week_start = parse_period(page_text)
+        period_start = parse_period(page_text)
+        # Der gedruckte Zeitraum beginnt gelegentlich erst am Dienstag, obwohl die
+        # Tabelle weiterhin Montag bis Freitag der ISO-Woche enthält.
+        week_start = period_start - timedelta(days=period_start.weekday())
         tables = [table for page in pdf.pages for table in page.extract_tables()]
 
     table = next((t for t in tables if any(row and "Hauptgerichte" in compact(" ".join(x or "" for x in row)) for row in t)), None)
@@ -137,7 +143,11 @@ def parse_pdf(pdf_path: Path, source_url: str) -> dict:
 
     soup_col = header_index(lambda value: value == "eintopf", "Eintopf")
     main_col = header_index(lambda value: value == "hauptgerichte", "Hauptgerichte")
-    side_col = header_index(lambda value: value.endswith("beilagen") and "gemüse" not in value, "Beilagen")
+    side_col = header_index(
+        lambda value: (value.endswith("beilagen") or value.startswith("sättigungsbeil"))
+        and "gemüse" not in value,
+        "Beilagen",
+    )
     vegetable_col = header_index(lambda value: "gemüsebeilagen" in value, "Gemüsebeilagen")
     dessert_col = header_index(lambda value: value == "dessert", "Dessert")
     category_cols = [soup_col, main_col, side_col, vegetable_col, dessert_col]
@@ -184,8 +194,14 @@ def parse_pdf(pdf_path: Path, source_url: str) -> dict:
                 main_text = "\n".join(parts[1:])
 
         add_item(current, "soups", row[soup_col], row[soup_price_col])
-        if main_text.lower().startswith("heute zum salat:"):
-            add_item(current, "salads", re.sub(r"^Heute zum Salat:\s*", "", main_text, flags=re.I), row[main_price_col])
+        if re.match(r"^(?:heute zum salat|zum salat reichen wir(?: heute)?)\s*:", main_text, re.I):
+            salad_text = re.sub(
+                r"^(?:heute zum salat|zum salat reichen wir(?: heute)?)\s*:\s*",
+                "",
+                main_text,
+                flags=re.I,
+            )
+            add_item(current, "salads", salad_text, row[main_price_col])
         else:
             add_item(current, "mains", main_text, row[main_price_col])
         add_item(current, "sides", row[side_col], row[side_price_col])
@@ -200,8 +216,17 @@ def parse_pdf(pdf_path: Path, source_url: str) -> dict:
 
     if [m["day"] for m in menus] != DAYS:
         raise RuntimeError(f"Erwartet Mo–Fr, erkannt: {[m['day'] for m in menus]}")
-    if any(not m["mains"] for m in menus):
-        raise RuntimeError("Mindestens ein Wochentag hat kein Hauptgericht")
+    required = {
+        "soups": "Eintopf",
+        "mains": "Hauptgericht",
+        "sides": "Beilage",
+        "vegetables": "Gemüsebeilage",
+        "desserts": "Dessert",
+    }
+    for key, label in required.items():
+        missing = [menu["day"] for menu in menus if not menu[key]]
+        if missing:
+            raise RuntimeError(f"{label} fehlt für: {chr(44).join(missing)}")
 
     iso = week_start.isocalendar()
     return {
