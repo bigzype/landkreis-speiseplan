@@ -1,0 +1,254 @@
+{
+  "week": "2026-KW36",
+  "week_start": "2026-08-31",
+  "source_url": "https://www.landkreis-restaurant.de/documents/278/Speise36.2026.pdf",
+  "menus": [
+    {
+      "day": "Montag",
+      "date": "2026-08-31",
+      "soups": [
+        {
+          "text": "Holsteiner-Kartoffeleintopf Mit o. ohne Wurst",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Hähnchenbrustfilet mit Avocadospalten und einer sauce Chorn (Tomatisierte Hollandaise)",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Deftiges Kotelett, ala Hubert, mit Waldpilzen, eingelegten Paprika in Kräuter der Provoncesauce, Herbstgericht",
+          "price": "7,50 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Cous-Cous Mit Tomate",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Röstkartoffeln",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Brokkoligemüse mit Sojasauce",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Rahmspinat mit Mozzarella",
+          "price": "1,50 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tagessalat",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": [
+        {
+          "text": "Ofenkartoffeln mit Trüffel-Schmand",
+          "price": "7,00 €"
+        }
+      ]
+    },
+    {
+      "day": "Dienstag",
+      "date": "2026-09-01",
+      "soups": [
+        {
+          "text": "Hühnersuppen topf mit Mungosprossen. Und Reis",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Schlankwelsfilet in Pankomehl gebacken auf einem milden Holländischen Chinakohlrahmgemüse Dienstag ist Fischtag",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Rindfleisch Pasta mit Rindfleischstreifen (oder Tofu) in süß-saurer wer möchte immer noch Parmesan dazu",
+          "price": "7,50 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Kürbis-Kartoffelpüh",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Butterkartoffeln",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Kohlrabi in Rahm",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Leipziger Allerlei",
+          "price": "1,50 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tagessalat",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": [
+        {
+          "text": "ein Schweineschnitzel gratiniert",
+          "price": "7,00 €"
+        }
+      ]
+    },
+    {
+      "day": "Mittwoch",
+      "date": "2026-09-02",
+      "soups": [
+        {
+          "text": "Schnippelbohnen eintopf mit Wurst",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Nach links und dann nach rechts Holländische Schweinesschnitzel mit Camembert und Preiselbeeren Läuft immer",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Eine Quiche mit Manglod, Spinat, Tomate und sauce Bearnaise",
+          "price": "7,50 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Butterkartoffeln",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Kartoffel-Kroketten",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Delikatess-bohnen",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Brüssler-Rosenkohl",
+          "price": "1,50 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tagessalat",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": [
+        {
+          "text": "ein Linsenbratling",
+          "price": "7,00 €"
+        }
+      ]
+    },
+    {
+      "day": "Donnerstag",
+      "date": "2026-09-03",
+      "soups": [
+        {
+          "text": "Steckrüben-Kartoffel-Eintopf mit „heißmacher“ Wurst",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Hausgemacht Frikadelle Art / Bulette / Fleischkloß / Jäger Art ½ und ½ Rind, Schwein, mit klassischer Pilzsauce",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Fast Schwäbische Spätzlepfanne mit Hähnchen mit frischem Spinat und etwas schmand (auch Vegetarisch)",
+          "price": "7,50 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Röstinchen",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Ein Steinpilz-kartoffelgratin",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Kaiserliches Gemüse",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Romanesco gemüse",
+          "price": "1,50 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tagessalat",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": [
+        {
+          "text": "ein Kartoffelrösti Schmand",
+          "price": "7,00 €"
+        }
+      ]
+    },
+    {
+      "day": "Freitag",
+      "date": "2026-09-04",
+      "soups": [
+        {
+          "text": "Holsteiner Kartoffeleintopf mit und ohne Bockwurst",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Fischfilet mit einer Graved.Lachssauce Freitag ist Fischtag",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Überraschungsgericht, leckeres aus den Landkreistöpfen",
+          "price": ""
+        }
+      ],
+      "sides": [
+        {
+          "text": "Schnittlauch-Kartoffeln",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Mischgemüse",
+          "price": "1,50 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tagessalat",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": []
+    }
+  ]
+}
