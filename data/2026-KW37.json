@@ -1,0 +1,257 @@
+{
+  "week": "2026-KW37",
+  "week_start": "2026-09-07",
+  "source_url": "https://www.landkreis-restaurant.de/documents/279/Speise_37.2026.pdf",
+  "menus": [
+    {
+      "day": "Montag",
+      "date": "2026-09-07",
+      "soups": [
+        {
+          "text": "Steckrüben-kartoffeleintopf Mit o. ohne Wurst",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Meliertes Fischfilet „Bamberger Art““ auf einem Spitzkohl -Weißweingemüse (Fisch ist und bleibt ein Renner)",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Asiatischen Geflügel-Nudelpfanne mit u.a Zuckerschoten, Mungobohnen, Sojasauce, Sweet Chilli halt auch Veggi",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Zum Salat reichen wir heute Schweinekotelett mit Birne und Blauschimmelkäse.",
+          "price": "7,00 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Dillkartoffeln",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Möhrenreis",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Mandelbrokkoli",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Zwiebelbohnen",
+          "price": "1,50 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": []
+    },
+    {
+      "day": "Dienstag",
+      "date": "2026-09-08",
+      "soups": [
+        {
+          "text": "Erbsen-Kartoffeleintopf mit Liebstöckel und wer mag Wurst dazu",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Franz. Schweinefiletgeschnetzeltzes mit frischen Austernpilzen und einem Schuss Portwein! Butterzart:",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Hähnchenbrustfilet mit einer Herbstlichen Kürbissauce",
+          "price": "7,50 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Gemüsereis",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Kräuter-Kartoffel",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Kaiserliches Gemüse",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Kohlrabi in Rahm",
+          "price": "1,50 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": [
+        {
+          "text": "ein Gemüseschnitzel",
+          "price": "7,00 €"
+        }
+      ]
+    },
+    {
+      "day": "Mittwoch",
+      "date": "2026-09-09",
+      "soups": [
+        {
+          "text": "Hackfleisch-Laucheintopf mit Frischkäse",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Butterzartes Schweineschnitzel mit gebackenen Zwiebelringen (Onions)und einer Pfeffersauce",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Marinierter Hirtenkäse mit Blätterteig mit einem Preiselbeersenf auf einem rotem Linsenragout",
+          "price": "7,50 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Butterkartoffeln",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Kartoffel-kroketten",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Leipziger Allerlei",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Erbsengemüse",
+          "price": "1,50 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": [
+        {
+          "text": "ein Nackenstek, mit Kräterbutter",
+          "price": "7,00 €"
+        }
+      ]
+    },
+    {
+      "day": "Donnerstag",
+      "date": "2026-09-10",
+      "soups": [
+        {
+          "text": "Spitzkohl-Kartoffel-Eintopf mit etwas Kümmel und ohne Bockwurst",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Butterzarter Rinderbraten mit einer Rotwein-Preiselbeersauce und Gemüsejuliel, ein hoch auf unsere Bauern",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Gebackene Falafel auf einem rote Beetehummus dazu eine Rotweinbirne leicht und bekömmlich",
+          "price": "7,50 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Petersilien-kartoffeln",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Semmel-knödel",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Blumenkohl „polnisch“",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Rosenkohl-gemüse",
+          "price": "1,50 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": [
+        {
+          "text": "Hähnchenbrustfilet, in Bärlauchkruste",
+          "price": "7,00 €"
+        }
+      ]
+    },
+    {
+      "day": "Freitag",
+      "date": "2026-09-11",
+      "soups": [
+        {
+          "text": "Holsteiner Kartoffel-Eintopf mit und ohne",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Gratiniertes Tilapiafilet (Fisch) mit einer Lauchrahmsauce",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Überraschungsgericht",
+          "price": ""
+        }
+      ],
+      "sides": [
+        {
+          "text": "Kräut -Kartoffel",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Mix-Gemüse",
+          "price": "1,50 €"
+        },
+        {
+          "text": "OS-Mix-Salat",
+          "price": "1,20 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": []
+    }
+  ]
+}
