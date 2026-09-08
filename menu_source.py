@@ -1,8 +1,9 @@
 """Dependency-free target-date and bounded actual-link discovery.
 
-Filenames are hints only. ``discover_menu_url`` is a legacy filename-only
-selector, NOT proof of freshness. Publication/monitoring use menu_fetch.probe_menu
-which validates all meaningful linked PDFs and their actual periods/content.
+Filenames can trigger monitoring updates, but are NOT publication evidence.
+``discover_menu_url`` is a legacy filename-only selector. Publication uses
+menu_fetch.probe_menu to validate linked PDFs and their actual periods/content;
+filename-first monitoring shares the constrained discovery below.
 """
 from __future__ import annotations
 

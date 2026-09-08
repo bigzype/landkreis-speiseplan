@@ -1,7 +1,8 @@
 """Shared bounded network/PDF probe used by menu_probe and the real updater.
 
-No output files are written. All candidates must parse completely before a result
-is returned. ``waiting`` means valid PDFs exist, but none covers the target week.
+No output files are written. Full probes validate all candidates; filename-first
+monitoring can return an update signal without PDF validation. ``waiting`` means
+valid PDFs exist, but none covers the target week.
 """
 from __future__ import annotations
 
@@ -13,7 +14,7 @@ from urllib.parse import unquote, urljoin, urlsplit
 
 import requests
 
-from menu_source import BASE_URL, _origin, menu_candidates, target_menu_date
+from menu_source import BASE_URL, _origin, menu_candidates, menu_identity, target_menu_date
 
 MAX_HTML_BYTES = 2_000_000
 MAX_PDF_BYTES = 8_000_000
@@ -84,12 +85,40 @@ def probe_menu(session: requests.Session, expected: date | None = None,
     claiming the same actual week are ambiguous even if bytes are identical.
     Distinct old/current/future weeks may coexist; all must be structurally valid.
     """
-    # Lazy parser import avoids a module cycle; updater itself uses this function.
-    from update_menu import parse_pdf
+    return _probe_menu(session, expected, base_url)
+
+
+def validate_previous_source(url: str, base_url: str = BASE_URL) -> str:
+    """Validate a baseline without fetching it; return its decoded basename."""
+    if _origin(url) != _origin(base_url):
+        raise ValueError('--previous-source muss denselben Ursprung wie die Quellseite haben')
+    basename = unquote(urlsplit(url).path.rsplit('/', 1)[-1])
+    if not basename.lower().endswith('.pdf'):
+        raise ValueError('--previous-source muss ein PDF-Link sein')
+    return basename
+
+
+def probe_menu_filename_first(session: requests.Session, expected: date | None = None,
+                              base_url: str = BASE_URL,
+                              previous_source: str | None = None) -> ProbeResult:
+    """Single safe link: changed basename, or matching week without a baseline.
+
+    A filename result means UPDATE, not verified PDF content. Any ambiguity or
+    unchanged/unclear name falls back to the full probe using the same index and
+    network budget. No PDF parser is imported on the filename-only path.
+    """
+    return _probe_menu(session, expected, base_url, filename_first=True,
+                       previous_source=previous_source)
+
+
+def _probe_menu(session: requests.Session, expected: date | None, base_url: str,
+                filename_first: bool = False, previous_source: str | None = None) -> ProbeResult:
 
     expected = expected if expected is not None else target_menu_date()
     deadline = time.monotonic() + NETWORK_BUDGET_SECONDS
     try:
+        previous_name = (validate_previous_source(previous_source, base_url)
+                         if previous_source is not None else None)
         page_bytes, page_url = _fetch(session, base_url, base_url, MAX_HTML_BYTES, deadline)
         try:
             candidates = menu_candidates(page_bytes.decode('utf-8-sig', errors='strict'), page_url)
@@ -97,6 +126,22 @@ def probe_menu(session: requests.Session, expected: date | None = None,
             raise ProbeError('SOURCE_INVALID', str(exc)) from exc
         if not candidates:
             raise ProbeError('NO_MENU_LINK', 'Kein sicherer Speiseplan-PDF-Link gefunden')
+        if filename_first and len(candidates) == 1:
+            url = candidates[0]
+            basename = unquote(urlsplit(url).path.rsplit('/', 1)[-1])
+            reason = None
+            if previous_name is not None:
+                if basename != previous_name:
+                    reason = 'FILENAME_CHANGED'
+            elif menu_identity(url) == expected.isocalendar()[:2]:
+                reason = 'FILENAME_WEEK'
+            if reason:
+                return ProbeResult({'status': 'current', 'reason': reason,
+                                    'detected_by': 'filename', 'source_url': url,
+                                    'actual': basename, 'expected_date': expected.isoformat()})
+        # Lazy import avoids the updater cycle and all parsing on filename hits.
+        from update_menu import parse_pdf
+
         parsed = []
         for url in candidates:
             content, _ = _fetch(session, url, base_url, MAX_PDF_BYTES, deadline)
