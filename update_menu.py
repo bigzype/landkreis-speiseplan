@@ -7,9 +7,11 @@ import html
 import json
 import re
 import sys
-import urllib.parse
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
+from tempfile import TemporaryDirectory
+
+from menu_source import current_menu_date, discover_menu_url
 
 import pdfplumber
 import requests
@@ -103,13 +105,10 @@ def parse_period(text: str) -> date:
     return date(start_year, month, int(start_day))
 
 
-def discover_pdf(session: requests.Session) -> str:
+def discover_pdf(session: requests.Session, expected: date | None = None) -> str:
     response = session.get(BASE_URL, timeout=45)
     response.raise_for_status()
-    links = re.findall(r'href=["\']([^"\']*Speise\d{1,2}\.\d{4}\.pdf)["\']', response.text, re.I)
-    if not links:
-        raise RuntimeError("Kein aktueller Speiseplan-Link auf der Website gefunden")
-    return urllib.parse.urljoin(BASE_URL, html.unescape(links[0]))
+    return discover_menu_url(response.text, BASE_URL, expected)
 
 
 def add_item(day: dict, category: str, text: str | None, price: str | None) -> None:
@@ -119,13 +118,18 @@ def add_item(day: dict, category: str, text: str | None, price: str | None) -> N
     day[category].append({"text": item_text, "price": clean_price(price)})
 
 
-def parse_pdf(pdf_path: Path, source_url: str) -> dict:
+def parse_pdf(pdf_path: Path, source_url: str, expected: date | None = None) -> dict:
+    expected = expected if expected is not None else current_menu_date()
     with pdfplumber.open(pdf_path) as pdf:
         page_text = "\n".join(page.extract_text() or "" for page in pdf.pages)
         period_start = parse_period(page_text)
         # Der gedruckte Zeitraum beginnt gelegentlich erst am Dienstag, obwohl die
         # Tabelle weiterhin Montag bis Freitag der ISO-Woche enthält.
         week_start = period_start - timedelta(days=period_start.weekday())
+        if week_start.isocalendar()[:2] != expected.isocalendar()[:2]:
+            raise ValueError(
+                f"PDF-Zeitraum {week_start} gehört nicht zur erwarteten ISO-Woche von {expected}"
+            )
         tables = [table for page in pdf.pages for table in page.extract_tables()]
 
     table = next((t for t in tables if any(row and "Hauptgerichte" in compact(" ".join(x or "" for x in row)) for row in t)), None)
@@ -399,37 +403,41 @@ def main() -> int:
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parent)
     args = parser.parse_args()
     root = args.root.resolve()
-    (root / "data").mkdir(parents=True, exist_ok=True)
-    (root / "pdf").mkdir(parents=True, exist_ok=True)
-
+    # Capture once: discovery and PDF validation must agree across midnight.
+    expected = current_menu_date()
     session = requests.Session()
     session.headers["User-Agent"] = "landkreis-speiseplan-calendar/1.0"
-    source_url = args.source_url or (args.pdf.as_uri() if args.pdf else discover_pdf(session))
+    source_url = args.source_url or (args.pdf.resolve().as_uri() if args.pdf else discover_pdf(session, expected))
 
-    if args.pdf:
-        pdf_path = args.pdf.resolve()
-    else:
-        response = session.get(source_url, timeout=60)
-        response.raise_for_status()
-        temp_path = root / "Speiseplan.pdf"
-        temp_path.write_bytes(response.content)
-        pdf_path = temp_path
+    # Stage downloads separately. No last-good output is touched until the PDF,
+    # expected week, all weekdays/categories, and rendered calendar validate.
+    with TemporaryDirectory(prefix="landkreis-menu-") as staging:
+        if args.pdf:
+            pdf_path = args.pdf.resolve()
+        else:
+            response = session.get(source_url, timeout=60)
+            response.raise_for_status()
+            pdf_path = Path(staging) / "Speiseplan.pdf"
+            pdf_path.write_bytes(response.content)
+        data = parse_pdf(pdf_path, source_url, expected)
+        pdf_bytes = pdf_path.read_bytes()
+        overview = render_overview(data)
+        ics = render_ics([data])
+        validate_ics(ics, len(data["menus"]))
 
-    data = parse_pdf(pdf_path, source_url)
+    (root / "data").mkdir(parents=True, exist_ok=True)
+    (root / "pdf").mkdir(parents=True, exist_ok=True)
     json_path = root / "data" / f"{data['week']}.json"
     json_path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     archive_path = root / "pdf" / f"{data['week']}.pdf"
-    if pdf_path != archive_path:
-        archive_path.write_bytes(pdf_path.read_bytes())
-    (root / "Speiseplan.pdf").write_bytes(pdf_path.read_bytes())
-    (root / "speiseplan.txt").write_text(render_overview(data), encoding="utf-8")
+    archive_path.write_bytes(pdf_bytes)
+    (root / "Speiseplan.pdf").write_bytes(pdf_bytes)
+    (root / "speiseplan.txt").write_text(overview, encoding="utf-8")
 
     # Der abonnierbare Feed enthält ausschließlich die aktuelle Woche. Archivdaten
     # bleiben als JSON erhalten, dürfen aber keine veralteten Termine im Live-Feed erzeugen.
-    ics = render_ics([data])
-    validate_ics(ics, len(data["menus"]))
     (root / "speiseplan.ics").write_bytes(ics.encode("utf-8"))
-    print(render_overview(data), end="")
+    print(overview, end="")
     print(f"\nQuelle: {source_url}")
     return 0
 

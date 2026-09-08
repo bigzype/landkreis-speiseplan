@@ -26,6 +26,9 @@ jobs:
       - name: Abhängigkeiten installieren
         run: pip install -r requirements.txt
 
+      - name: Regressionstests
+        run: python -m unittest discover -s tests -v
+
       - name: Speiseplan und Kalender aktualisieren
         run: python update_menu.py
 
