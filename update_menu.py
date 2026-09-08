@@ -8,15 +8,14 @@ import json
 import re
 import sys
 from datetime import date, datetime, timedelta, timezone
+from io import BytesIO
 from pathlib import Path
-from tempfile import TemporaryDirectory
-
-from menu_source import current_menu_date, discover_menu_url
+from menu_source import BASE_URL, current_menu_date, target_menu_date
+from menu_fetch import ProbeError, probe_menu
 
 import pdfplumber
 import requests
 
-BASE_URL = "https://www.landkreis-restaurant.de/"
 DAYS = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag"]
 MONTHS = {
     "januar": 1, "februar": 2, "märz": 3, "maerz": 3, "april": 4,
@@ -90,25 +89,33 @@ def detect_day(cell: str | None) -> str | None:
 
 
 def parse_period(text: str) -> date:
-    match = re.search(
+    matches = re.findall(
         r"Zeitraum\s*:?\s*(\d{1,2})\.?\s*([A-Za-zÄÖÜäöüß]+)\s+bis\s+(?:(?:zu|zum)\s+)?(\d{1,2})\.?\s*([A-Za-zÄÖÜäöüß]+)\.?\s+(\d{4})",
         text, re.IGNORECASE,
     )
-    if not match:
+    if not matches:
         raise ValueError("Zeitraum im PDF nicht gefunden")
-    start_day, start_month, _end_day, end_month, year = match.groups()
+    if len(matches) != len(re.findall(r"\bZeitraum\b", text, re.I)) or len(set(matches)) != 1:
+        raise ValueError("Mehrdeutige oder widersprüchliche PDF-Zeiträume")
+    start_day, start_month, end_day, end_month, year = matches[0]
     month = MONTHS.get(start_month.lower())
     final_month = MONTHS.get(end_month.lower())
     if not month or not final_month:
         raise ValueError(f"Unbekannter Monat: {start_month}")
     start_year = int(year) - 1 if month > final_month else int(year)
-    return date(start_year, month, int(start_day))
+    start = date(start_year, month, int(start_day))
+    end = date(int(year), final_month, int(end_day))
+    if end < start or start.isocalendar()[:2] != end.isocalendar()[:2]:
+        raise ValueError("Widersprüchlicher PDF-Zeitraum: Anfang und Ende müssen in derselben ISO-Woche liegen")
+    return start
 
 
 def discover_pdf(session: requests.Session, expected: date | None = None) -> str:
-    response = session.get(BASE_URL, timeout=45)
-    response.raise_for_status()
-    return discover_menu_url(response.text, BASE_URL, expected)
+    """Compatibility wrapper; validates actual PDF content, not the filename."""
+    result = probe_menu(session, expected)
+    if result.report['status'] != 'current':
+        raise ProbeError(result.report['reason'], result.report['detail'])
+    return result.report['source_url']
 
 
 def add_item(day: dict, category: str, text: str | None, price: str | None) -> None:
@@ -118,23 +125,29 @@ def add_item(day: dict, category: str, text: str | None, price: str | None) -> N
     day[category].append({"text": item_text, "price": clean_price(price)})
 
 
-def parse_pdf(pdf_path: Path, source_url: str, expected: date | None = None) -> dict:
+def parse_pdf(pdf_path: Path | BytesIO, source_url: str, expected: date | None = None,
+              *, verify_expected: bool = True) -> dict:
     expected = expected if expected is not None else current_menu_date()
     with pdfplumber.open(pdf_path) as pdf:
+        if len(pdf.pages) > 8:
+            raise ValueError("PDF hat zu viele Seiten (maximal 8)")
         page_text = "\n".join(page.extract_text() or "" for page in pdf.pages)
         period_start = parse_period(page_text)
         # Der gedruckte Zeitraum beginnt gelegentlich erst am Dienstag, obwohl die
         # Tabelle weiterhin Montag bis Freitag der ISO-Woche enthält.
         week_start = period_start - timedelta(days=period_start.weekday())
-        if week_start.isocalendar()[:2] != expected.isocalendar()[:2]:
+        if verify_expected and week_start.isocalendar()[:2] != expected.isocalendar()[:2]:
             raise ValueError(
                 f"PDF-Zeitraum {week_start} gehört nicht zur erwarteten ISO-Woche von {expected}"
             )
         tables = [table for page in pdf.pages for table in page.extract_tables()]
 
-    table = next((t for t in tables if any(row and "Hauptgerichte" in compact(" ".join(x or "" for x in row)) for row in t)), None)
-    if not table:
+    menu_tables = [t for t in tables if any(row and "Hauptgerichte" in compact(" ".join(x or "" for x in row)) for row in t)]
+    if not menu_tables:
         raise RuntimeError("Menü-Tabelle im PDF nicht gefunden")
+    if len(menu_tables) != 1:
+        raise ValueError("Mehrere Menü-Tabellen im PDF gefunden")
+    table = menu_tables[0]
 
     header = next(row for row in table if row and "Hauptgerichte" in compact(" ".join(x or "" for x in row)))
     normalized_header = [re.sub(r"[^a-zäöüß]", "", (cell or "").lower()) for cell in header]
@@ -404,26 +417,31 @@ def main() -> int:
     args = parser.parse_args()
     root = args.root.resolve()
     # Capture once: discovery and PDF validation must agree across midnight.
-    expected = current_menu_date()
-    session = requests.Session()
-    session.headers["User-Agent"] = "landkreis-speiseplan-calendar/1.0"
-    source_url = args.source_url or (args.pdf.resolve().as_uri() if args.pdf else discover_pdf(session, expected))
+    expected = target_menu_date()
+    if args.source_url and not args.pdf:
+        parser.error("--source-url ist nur mit --pdf erlaubt")
 
-    # Stage downloads separately. No last-good output is touched until the PDF,
-    # expected week, all weekdays/categories, and rendered calendar validate.
-    with TemporaryDirectory(prefix="landkreis-menu-") as staging:
-        if args.pdf:
-            pdf_path = args.pdf.resolve()
-        else:
-            response = session.get(source_url, timeout=60)
-            response.raise_for_status()
-            pdf_path = Path(staging) / "Speiseplan.pdf"
-            pdf_path.write_bytes(response.content)
-        data = parse_pdf(pdf_path, source_url, expected)
-        pdf_bytes = pdf_path.read_bytes()
-        overview = render_overview(data)
-        ics = render_ics([data])
-        validate_ics(ics, len(data["menus"]))
+    # Keep verified bytes in memory. No last-good output is touched until ALL
+    # candidates, expected week, full menu, and rendered calendar validate.
+    if args.pdf:
+        source_url = args.source_url or args.pdf.resolve().as_uri()
+        pdf_bytes = args.pdf.resolve().read_bytes()
+        data = parse_pdf(BytesIO(pdf_bytes), source_url, expected)
+    else:
+        session = requests.Session()
+        session.headers["User-Agent"] = "landkreis-speiseplan-calendar/1.0"
+        try:
+            result = probe_menu(session, expected)
+        finally:
+            session.close()
+        if result.report['status'] != 'current':
+            raise ProbeError(result.report['reason'], result.report['detail'])
+        data, pdf_bytes = result.data, result.pdf_bytes
+        assert data is not None and pdf_bytes is not None
+        source_url = data['source_url']
+    overview = render_overview(data)
+    ics = render_ics([data])
+    validate_ics(ics, len(data["menus"]))
 
     (root / "data").mkdir(parents=True, exist_ok=True)
     (root / "pdf").mkdir(parents=True, exist_ok=True)

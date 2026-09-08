@@ -10,6 +10,7 @@ import unittest
 from unittest.mock import Mock, patch
 
 import update_menu as updater
+from test_menu_probe import Session, Response
 
 ROOT = Path(__file__).resolve().parents[1]
 CATEGORIES = ('soups', 'mains', 'sides', 'vegetables', 'desserts')
@@ -86,12 +87,9 @@ class ArchiveTests(unittest.TestCase):
 
 class PublicationTests(unittest.TestCase):
     def run_staged(self, root, expected, content, validator_error=False, download_error=False):
-        session = Mock()
-        session.headers = {}
-        session.get.return_value.content = content
-        if download_error:
-            session.get.return_value.raise_for_status.side_effect = updater.requests.HTTPError('synthetic HTTP 503')
-        with patch('sys.argv', ['update_menu.py', '--root', str(root)]), patch.object(updater, 'current_menu_date', return_value=expected), patch.object(updater.requests, 'Session', return_value=session), patch.object(updater, 'discover_pdf', return_value=updater.BASE_URL + 'Speise_37.2026.pdf'), redirect_stdout(StringIO()):
+        session = Session('<a href="Speise_37.2026.pdf">Speiseplan</a>', {
+            'Speise_37.2026.pdf': Response(content, status=503 if download_error else 200)})
+        with patch('sys.argv', ['update_menu.py', '--root', str(root)]), patch.object(updater, 'target_menu_date', return_value=expected), patch.object(updater.requests, 'Session', return_value=session), redirect_stdout(StringIO()):
             if validator_error:
                 with patch.object(updater, 'validate_ics', side_effect=RuntimeError('synthetic invalid ICS')):
                     return updater.main()
@@ -110,10 +108,10 @@ class PublicationTests(unittest.TestCase):
                 pdf = (ROOT / 'pdf/2026-KW36.pdf').read_bytes()
                 expected = date(2026, 9, 8) if failure == 'wrong-week' else date(2026, 9, 1)
                 errors = {
-                    'wrong-week': (ValueError, 'erwarteten ISO-Woche'),
-                    'malformed-pdf': (updater.pdfplumber.utils.exceptions.PdfminerException, 'No /Root object'),
+                    'wrong-week': (updater.ProbeError, 'erwartet 2026-KW37'),
+                    'malformed-pdf': (updater.ProbeError, 'No /Root object'),
                     'invalid-ics': (RuntimeError, 'synthetic invalid ICS'),
-                    'http-error': (updater.requests.HTTPError, 'synthetic HTTP 503'),
+                    'http-error': (updater.ProbeError, 'HTTP 503'),
                 }
                 error_type, message = errors[failure]
                 with self.assertRaisesRegex(error_type, message):

@@ -92,8 +92,8 @@ class DiscoveryTests(unittest.TestCase):
 
     def test_updater_uses_shared_discovery(self):
         import update_menu
-        session = Mock()
-        session.get.return_value.text = f'<a href="{CURRENT}">'
+        from test_menu_probe import Session, pdf
+        session = Session(f'<a href="{CURRENT}">', {CURRENT.lstrip('/'): pdf(37)})
         self.assertEqual(update_menu.discover_pdf(session, EXPECTED), BASE.rstrip('/') + CURRENT)
 
 
