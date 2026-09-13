@@ -1,0 +1,258 @@
+{
+  "week": "2026-KW38",
+  "week_start": "2026-09-14",
+  "source_url": "https://www.landkreis-restaurant.de/documents/280/Speise_38._2026.pdf",
+  "menus": [
+    {
+      "day": "Montag",
+      "date": "2026-09-14",
+      "soups": [
+        {
+          "text": "Karotteneintopf mit Kartoffelwürfel und Bockwurst",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Schollenfilet auf einem cremigen klassiischen Remouladensauce, muss man da noch viel mehr zu schreiben!?",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Geschwenkte Spaghetti mit Champignons in Frischkäsesauce, Lauchstreifen, genial einfach, aber auch genial lecker",
+          "price": "7,50 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Kartoffel-kroketten, C",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Dampfkartoffeln",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Italienisches Zuckergemüse",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Kohlrabi in Rahm",
+          "price": "1,50 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": [
+        {
+          "text": "Calamari mit Ajoli",
+          "price": "7,00 €"
+        }
+      ]
+    },
+    {
+      "day": "Dienstag",
+      "date": "2026-09-15",
+      "soups": [
+        {
+          "text": "Hühnersuppen-Topf mit reichlich Einlage und Eierstich, verfeinert mit etwas aus der",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Französisches Schweinschnitzel mit Birne und Camembert gratiniert dazu eine Calvadossauce",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Gemüse-Kürbisragout in Curcumasauce und einem gebratenen Räuchertofu in Sesamkruste",
+          "price": "7,50 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Pellkartoffeln",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Twister",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Bohnen-Tomatengemüse",
+          "price": "1,50 €"
+        },
+        {
+          "text": "mit Knoblauch Broccoligemüse",
+          "price": "1,50 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": [
+        {
+          "text": "Matjesfilet Hausfraun Art",
+          "price": "7,00 €"
+        }
+      ]
+    },
+    {
+      "day": "Mittwoch",
+      "date": "2026-09-16",
+      "soups": [
+        {
+          "text": "Apotheke Chili con Carne Mit Hackfleisch und einem Bohnenragout",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Hähnchenragout mit jungen Spinat Spitzkohl und Spargel in Weißweinrahm",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Schlankwelsfilet mit einer Honig-Senfkruste, auf einem Blattspinat Natürlich in Sahnesauce mit einem Hauch von Knoblauch, leicht gratiniert",
+          "price": "7,50 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Langkornreis mit Erbsen",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Schnittlauch-kartoffeln",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Kaiserliches Gemüse",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Blumenkohl in Rahm",
+          "price": "1,50 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": [
+        {
+          "text": "Hausgemachter Gemüsebratling mit Quark",
+          "price": "7,00 €"
+        }
+      ]
+    },
+    {
+      "day": "Donnerstag",
+      "date": "2026-09-17",
+      "soups": [
+        {
+          "text": "Steckrüben-Kartoffeleintopf mit Bock-oder Mettwurst",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Gebratenes Kasslersteak frisch aus dem Rauch, mit einer Specksauce",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Hirschgoulasch, das beste kommt zum Sch(l)uss mit Waldpilzen in einer Majoran-Rotweinsauce",
+          "price": "8,00 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Röstkartoffeln",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Schwäbisch-Ostenfelder-Spätzle",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Rosenkohl-gemüse",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Sauerkraut ein muss zum Kassler",
+          "price": "1,50 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": [
+        {
+          "text": "eine knackigen Wrap mit Salat gefüllt",
+          "price": "7,00 €"
+        }
+      ]
+    },
+    {
+      "day": "Freitag",
+      "date": "2026-09-18",
+      "soups": [
+        {
+          "text": "Pichelsteiner Eintopf mit Bockwurst",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Butterweiches und Rinderragout mit einer Schalotten T hymiansauce",
+          "price": "7,50 €"
+        },
+        {
+          "text": "1S urprise…wieder leckere Überraschung aus den Landkreistöpfen",
+          "price": ""
+        }
+      ],
+      "sides": [
+        {
+          "text": "Gebackene Rosmarin-Kartoffeln",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Preiselbeer Rotkohl",
+          "price": "1,50 €"
+        },
+        {
+          "text": "OS-Salatmix",
+          "price": "1,20 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": []
+    }
+  ]
+}
