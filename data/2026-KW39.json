@@ -1,0 +1,258 @@
+{
+  "week": "2026-KW39",
+  "week_start": "2026-09-21",
+  "source_url": "https://www.landkreis-restaurant.de/documents/281/Speise39.2026.pdf",
+  "menus": [
+    {
+      "day": "Montag",
+      "date": "2026-09-21",
+      "soups": [
+        {
+          "text": "Curry-Hähnchen-Topf mit einem hauch von Ingwer und Chilli",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Friesisches Schweineschnitzel mit einer Röstzwiebel paniert und Käsesauce",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Käsetortellini mit Gemüse in dreierlei Käsesauce, Vegi und dazu noch einfach lecker!!",
+          "price": "7,50 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Kartoffel-kroketten",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Schnittlauch-Kartoffeln",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "TEX-MEX-Gemüse",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Kohlrabi",
+          "price": "1,50 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": [
+        {
+          "text": "Hähnchenspieß „Madras“",
+          "price": "7,00 €"
+        }
+      ]
+    },
+    {
+      "day": "Dienstag",
+      "date": "2026-09-22",
+      "soups": [
+        {
+          "text": "Tomatisierter Linseneintopf mit Kartoffeln und Sellerie, wer mag mit Mettwurst",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Welsfilet in Zitronenpfefferkruste mit einem Rahmkäsemangold, bei dem schied Wetter das Beste, 1",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Hähnchenbrustfilet in Knusperpanade mit einer grünen-Kokossauce und bei dem Wetter Frühlingslauch",
+          "price": "7,50 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Kräuter-kartoffeln",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Schlotziger Risottoreis",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Feine Erbsen",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Kaiserliches Gemüse",
+          "price": "1,50 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": [
+        {
+          "text": "Rosmarienkartoffeln Lmit Bärlauch-Kräuterdipp",
+          "price": "7,00 €"
+        }
+      ]
+    },
+    {
+      "day": "Mittwoch",
+      "date": "2026-09-23",
+      "soups": [
+        {
+          "text": "Hausmacher Goulaschsuppe",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Schlemmerspieß: Medallions am Spieß vom Schweinefilet auf einem Zwiebelmus, mit einer Sauce Bearnaise",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Paella mit Frutti de Mare, Geflügel, Reis Für Urlaubsgedanken",
+          "price": "7,50 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Butterkartoffeln",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Waffel kartoffeln",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Brokkoli",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Honig-Ingewer-karotten",
+          "price": "1,50 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": [
+        {
+          "text": "Hähnchenkeule in BBQ",
+          "price": "7,00 €"
+        }
+      ]
+    },
+    {
+      "day": "Donnerstag",
+      "date": "2026-09-24",
+      "soups": [
+        {
+          "text": "„Schwedische“ Erbseneintopf mit einem Sellerie und Gemüsestiften",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Hausgemachte Reibekuchen Leine deftige große Portion mit Apfelmus",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Geflügelgyros in einer Ajvar-Metaxasauce mit Käsegratiniert",
+          "price": "7,50 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Brat-Kartoffeln",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Gebratene Spätzle",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Rosenkohl",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Speckbohnen",
+          "price": "1,50 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": [
+        {
+          "text": "Eine Frühlingsrolle veggi",
+          "price": "7,00 €"
+        }
+      ]
+    },
+    {
+      "day": "Freitag",
+      "date": "2026-09-25",
+      "soups": [
+        {
+          "text": "„Quer durch den Garten“ mit Frühlingsgemüse Kartoffeln und",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Mehliertes Fischfilet ala Doria“ auf einem Dill-Gurkenrahm“",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Surprise…wieder leckere Überraschung aus den Landkreistöpfen",
+          "price": "7,00 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Petersilien-kartoffeln",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Gemüsegratin",
+          "price": "1,50 €"
+        },
+        {
+          "text": "OS-Mixsalat",
+          "price": "1,20 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": []
+    }
+  ]
+}
