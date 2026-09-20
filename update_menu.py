@@ -89,8 +89,10 @@ def detect_day(cell: str | None) -> str | None:
 
 
 def parse_period(text: str) -> date:
+    # KW39/2026 prints "21: September": accept that single punctuation typo
+    # only after the start day; keep both explicit dates and all period guards.
     matches = re.findall(
-        r"Zeitraum\s*:?\s*(\d{1,2})\.?\s*([A-Za-zÄÖÜäöüß]+)\s+bis\s+(?:(?:zu|zum)\s+)?(\d{1,2})\.?\s*([A-Za-zÄÖÜäöüß]+)\.?\s+(\d{4})",
+        r"Zeitraum\s*:?\s*(\d{1,2})[.:]?\s*([A-Za-zÄÖÜäöüß]+)\s+bis\s+(?:(?:zu|zum)\s+)?(\d{1,2})\.?\s*([A-Za-zÄÖÜäöüß]+)\.?\s+(\d{4})",
         text, re.IGNORECASE,
     )
     if not matches:
