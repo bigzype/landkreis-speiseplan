@@ -2,6 +2,8 @@
 
 Automatisch aktualisierter Wochenplan des Landkreis Restaurants Osnabrück.
 
+Dokumentation: [Parser-Lessons](lessons.md) · [Begrenzte automatische Fehlerbehebung](docs/bounded-recovery.md).
+
 - **Kalenderabo:** `webcal://bigzype.github.io/landkreis-speiseplan/speiseplan.ics`
 - **ICS-Datei:** https://bigzype.github.io/landkreis-speiseplan/speiseplan.ics
 - **Lesbare Wochenübersicht:** `speiseplan.txt`
