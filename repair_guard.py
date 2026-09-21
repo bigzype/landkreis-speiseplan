@@ -28,11 +28,13 @@ GH = Path('/Users/osiris/.local/bin/gh')
 PARSE = '''import json,sys
 from pathlib import Path
 from datetime import date
-from update_menu import parse_pdf
+from update_menu import parse_pdf,render_ics,render_overview,validate_ics
 try:
  d=parse_pdf(Path(sys.argv[1]),sys.argv[2],date.fromisoformat(sys.argv[3]))
- print(json.dumps({'ok':True,'week':d['week']}))
-except (ValueError,RuntimeError) as e:
+ ics=render_ics([d])
+ validate_ics(ics,len(d['menus']))
+ print(json.dumps({'ok':True,'week':d['week'],'data':d,'ics':ics,'text':render_overview(d)}))
+except (ValueError,RuntimeError,TypeError,KeyError,IndexError,AttributeError) as e:
  print(json.dumps({'ok':False,'kind':type(e).__name__,'message':str(e)}))
 '''
 
@@ -116,7 +118,39 @@ def source_bytes(url):
 
 
 def parse_source(path, source, target, cwd=REPO):
-    return json.loads(run([PYTHON, '-c', PARSE, path, source, target], cwd=cwd))
+    result = json.loads(run([PYTHON, '-B', '-c', PARSE, path, source, target], cwd=cwd))
+    if result.get('ok'):
+        # Run trusted installed validator outside candidate imports, before any push.
+        command = '''import json,sys
+from datetime import date
+from icalendar import Calendar
+from landkreis_validate_live import validate_text,validate_ics
+v=json.loads(sys.argv[1]); year,week,_=date.fromisoformat(sys.argv[2]).isocalendar()
+try:
+ _,bodies=validate_text(v['text'].encode(),year,week)
+ validate_ics(v['ics'].encode(),bodies)
+ events=Calendar.from_ical(v['ics'].encode()).walk('VEVENT')
+ menus={m['date']:m for m in v['data']['menus']}
+ for e in events:
+  start=e.decoded('DTSTART'); end=e.decoded('DTEND')
+  if start.strftime('%H:%M')!='12:00' or end.strftime('%H:%M')!='13:45' or start.date()!=end.date(): raise ValueError('meal window changed')
+  if str(e.get('DTSTART').params.get('TZID'))!='Europe/Berlin' or str(e.get('DTEND').params.get('TZID'))!='Europe/Berlin': raise ValueError('meal timezone changed')
+  if str(e.get('LOCATION'))!='Landkreis Restaurant Osnabrück, Am Schölerberg 1, 49082 Osnabrück, Deutschland': raise ValueError('meal location changed')
+  if int(e.get('SEQUENCE',-1))<5: raise ValueError('event sequence regressed')
+  if str(e.get('TRANSP'))!='OPAQUE': raise ValueError('meal transparency changed')
+  if str(e.get('UID'))!='landkreis-speiseplan-'+start.date().isoformat()+'@pro-mac-support.de': raise ValueError('event identity changed')
+  if v['data']['source_url']!=str(e.get('URL')): raise ValueError('source URL changed')
+  menu=menus[start.date().isoformat()]; description=str(e.get('DESCRIPTION',''))
+  for category in ('soups','mains','sides','vegetables','desserts','salads'):
+   for item in menu[category]:
+    expected=item['text']+(' – '+item['price'] if item.get('price') else '')
+    if expected not in description: raise ValueError('normalized item/price missing from ICS')
+ print(json.dumps({'ok':True,'week':v['week']}))
+except (ValueError,RuntimeError,TypeError,KeyError,IndexError,AttributeError) as e:
+ print(json.dumps({'ok':False,'kind':type(e).__name__,'message':'ICS validation: '+str(e)}))
+'''
+        return json.loads(run([VALIDATOR, '-c', command, json.dumps(result), target], cwd=HOME / 'scripts'))
+    return result
 
 
 def live(target, record=False):
@@ -142,7 +176,7 @@ def decision(pdf, parsed, target, source, ledger, readonly=False):
         phase = 'UPDATE'
     else:
         # Only deterministic parser errors are eligible, not network/auth/model errors.
-        if parsed.get('kind') not in ('ValueError', 'RuntimeError'): raise ValueError('not a parser failure')
+        if parsed.get('kind') not in ('ValueError', 'RuntimeError', 'TypeError', 'KeyError', 'IndexError', 'AttributeError'): raise ValueError('not a parser failure')
         signature = 'PARSE:' + parsed['kind'] + ':' + digest(parsed['message'].encode())
         phase = 'REPAIR'
     key = digest((sha + '\n' + signature).encode())
@@ -208,17 +242,46 @@ def begin(key, ledger):
 
 
 def parser_scope(before, after):
-    """Only period-pattern assignment may change; every date/week guard frozen."""
+    """Bounded pure helpers + period syntax; orchestration and guards frozen.
+
+    This is a publication gate, not a Python security sandbox. Future repair
+    agents cannot change this allowlist or introduce imports/system operations.
+    """
+    editable = {'compact', 'clean_text', 'clean_price', 'detect_day', 'add_item',
+                'escape_ics', 'fold_ics', 'priced', 'short_name',
+                'event_description', 'calendar_description', 'html_description',
+                'render_overview', 'render_ics'}
     a, b = ast.parse(before), ast.parse(after)
+    originals = {n.name: n for n in a.body if isinstance(n, ast.FunctionDef)}
+    for i, node in enumerate(b.body):
+        if not isinstance(node, ast.FunctionDef) or node.name not in editable:
+            continue
+        old = originals[node.name]
+        # Signatures/decorators/defaults are not repairable execution hooks.
+        if (ast.dump(node.args) != ast.dump(old.args)
+                or node.decorator_list != old.decorator_list
+                or ast.dump(node.returns or ast.Constant(None)) != ast.dump(old.returns or ast.Constant(None))):
+            raise ValueError('helper signature changed')
+        banned = {'eval','exec','compile','open','__import__','globals','locals',
+                  'getattr','setattr','delattr','vars','input','breakpoint',
+                  'os','sys','subprocess','requests','Path','probe_menu',
+                  'parse_pdf','validate_ics','main'}
+        for part in ast.walk(node):
+            if isinstance(part, (ast.Import, ast.ImportFrom, ast.Global, ast.Nonlocal)):
+                raise ValueError('helper imports/global mutation forbidden')
+            if isinstance(part, ast.Name) and (part.id in banned or part.id.startswith('__')):
+                raise ValueError('helper unsafe name')
+            if isinstance(part, ast.Attribute) and part.attr.startswith('__'):
+                raise ValueError('helper unsafe attribute')
+        b.body[i] = old
     aa = next(n for n in a.body if isinstance(n, ast.FunctionDef) and n.name == 'parse_period')
     bb = next(n for n in b.body if isinstance(n, ast.FunctionDef) and n.name == 'parse_period')
     if not isinstance(bb.body[0], ast.Assign): raise ValueError('invalid parser edit')
-    # Pattern is a literal argument to the exact original re.findall call.
     old, new = aa.body[0].value, bb.body[0].value
     if not isinstance(new, ast.Call) or not new.args or not isinstance(new.args[0], ast.Constant) or not isinstance(new.args[0].value, str):
         raise ValueError('only literal period regex repair allowed')
     new.args[0] = old.args[0]
-    if ast.dump(a) != ast.dump(b): raise ValueError('repair exceeds period syntax scope / changes validation')
+    if ast.dump(a) != ast.dump(b): raise ValueError('repair exceeds helper scope / changes validation')
 
 
 def check_scope(worktree, base):
