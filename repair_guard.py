@@ -185,12 +185,28 @@ print(json.dumps(all(x.date().isocalendar()[:2]<target for x in s)))
     return json.loads(run([VALIDATOR, '-c', command, target], cwd=HOME / 'scripts', timeout=40))
 
 
+def effective_records(ledger):
+    """Follow explicit child links, never filenames or status-reset history."""
+    records = [json.loads(p.read_text()) for p in sorted(ledger.root.glob('*.json'))]
+    by_id = {v['id']: v for v in records}
+    superseded = set()
+    for v in records:
+        if v.get('parent'):
+            from manual_recovery import child_id, parent_intact
+            parent_intact(v, ledger)
+            p = by_id.get(v['parent'])
+            if (not p or p['status'] != 'failed' or v['id'] != child_id(p['id'])
+                    or any(v[k] != p[k] for k in ('source', 'source_sha256', 'target'))):
+                raise ValueError('invalid manual follow-up relation')
+            superseded.add(p['id'])
+    return [v for v in records if v['id'] not in superseded]
+
+
 def inspect(target, source, ledger=None, readonly=False):
     ledger = ledger or Ledger()
     # Reuse a prior claim for the same detection: no source polling or second model attempt.
     if ledger.root.exists():
-        for p in sorted(ledger.root.glob('*.json')):
-            v = json.loads(p.read_text())
+        for v in effective_records(ledger):
             if v['target'] == target and v['source'] == source:
                 return dict(phase='COMPLETE' if v['status'] == 'verified' else 'BLOCKED',
                             incident=v['id'], detail='ATTEMPT_' + v['status'].upper())

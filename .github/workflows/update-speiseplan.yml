@@ -1,9 +1,26 @@
 name: Speiseplan aktualisieren
+run-name: ${{ inputs.recovery_id && format('Manual recovery {0}', inputs.recovery_id) || 'Speiseplan aktualisieren' }}
 
 on:
   # Der Hermes-Quellenmonitor startet den Workflow erst, wenn die aktuelle
   # Wochen-PDF auf der Restaurantseite verfügbar ist.
   workflow_dispatch:
+    inputs:
+      recovery_id:
+        type: string
+        default: ""
+      code_sha:
+        type: string
+        default: ""
+      source_sha:
+        type: string
+        default: ""
+      source_url:
+        type: string
+        default: ""
+      target:
+        type: string
+        default: ""
 
 permissions:
   contents: write
@@ -30,7 +47,18 @@ jobs:
         run: python -m unittest discover -s tests -v
 
       - name: Speiseplan und Kalender aktualisieren
+        if: ${{ !inputs.recovery_id }}
         run: python update_menu.py
+
+      - name: Manuell autorisierte feste Quelle validieren und verarbeiten
+        if: ${{ inputs.recovery_id != '' }}
+        env:
+          RECOVERY_ID: ${{ inputs.recovery_id }}
+          CODE_SHA: ${{ inputs.code_sha }}
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          SOURCE_URL: ${{ inputs.source_url }}
+          TARGET: ${{ inputs.target }}
+        run: python manual_recovery.py workflow-source
 
       - name: Änderungen veröffentlichen
         run: |

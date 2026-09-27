@@ -23,13 +23,17 @@ def main(readonly=False, force=False):
         # Durable intents outrank monitor hashes AND publication flags. Never silently
         # swallow an interrupted model/repair merely because its output hash was stored.
         if ledger.root.exists():
-            pending = [json.loads(p.read_text()) for p in sorted(ledger.root.glob('*.json'))]
+            pending = guard.effective_records(ledger)
             pending = [v for v in pending if v['target'] == target]
             if pending:
                 v = pending[-1]
-                if v['status'] in ('dispatched', 'awaiting_readback') and not readonly:
+                if (v['status'] in ('dispatched', 'awaiting_readback') or (v.get('parent') and v['status'] == 'dispatch_intent')) and not readonly:
                     # Read-only GitHub reconciliation, never a second processing attempt.
-                    result = guard.finish(v['id'], ledger)
+                    if v.get('parent'):
+                        from manual_recovery import finish
+                        result = finish(v['id'], ledger)
+                    else:
+                        result = guard.finish(v['id'], ledger)
                     if result['status'] == 'pending':
                         print(f"PHASE=AWAITING_PUBLICATION\nINCIDENT={v['id']}"); return
                     v = ledger.read(v['id'])
@@ -46,8 +50,7 @@ def main(readonly=False, force=False):
         # A workflow may finish after the original model turn's time budget. Deliver
         # the normal card through the ORIGINAL intent guard, never through this script.
         if ledger.root.exists() and 'PHASE=COMPLETE' in text:
-            for p in sorted(ledger.root.glob('*.json')):
-                v = json.loads(p.read_text())
+            for v in guard.effective_records(ledger):
                 if v['target'] == target and v['status'] == 'verified' and v['signature'] == 'PUBLIC_TARGET_STALE':
                     print(f"PHASE=PUBLICATION_READY\nINCIDENT={v['id']}"); return
         fields = dict(line.split('=', 1) for line in text.splitlines() if '=' in line)
@@ -69,4 +72,3 @@ if __name__ == '__main__':
     p = argparse.ArgumentParser()
     p.add_argument('--read-only', action='store_true'); p.add_argument('--check-now', action='store_true')
     a = p.parse_args(); main(a.read_only, a.check_now)
-
