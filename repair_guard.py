@@ -15,14 +15,18 @@ import os
 from pathlib import Path
 import re
 import subprocess
+import sys
 import tempfile
 from urllib.parse import urlsplit, unquote
 from urllib.request import Request, urlopen
 
-REPO = Path('/Users/osiris/Desktop/Projekte/landkreis-speiseplan')
+REPO = Path(__file__).resolve().parent
+ARTIFACT_VALIDATOR = REPO / 'validate_artifacts.py'
 HOME = Path('/Users/osiris/.hermes')
 ROOT = HOME / 'cron/state/landkreis-recovery'
 PYTHON = REPO / '.venv/bin/python'
+if not PYTHON.is_file():
+    PYTHON = Path(sys.executable)
 VALIDATOR = HOME / 'scripts/venvs/menu-validation/bin/python'
 GH = Path('/Users/osiris/.local/bin/gh')
 PARSE = '''import json,sys
@@ -120,36 +124,10 @@ def source_bytes(url):
 def parse_source(path, source, target, cwd=REPO):
     result = json.loads(run([PYTHON, '-B', '-c', PARSE, path, source, target], cwd=cwd))
     if result.get('ok'):
-        # Run trusted installed validator outside candidate imports, before any push.
-        command = '''import json,sys
-from datetime import date
-from icalendar import Calendar
-from landkreis_validate_live import validate_text,validate_ics
-v=json.loads(sys.argv[1]); year,week,_=date.fromisoformat(sys.argv[2]).isocalendar()
-try:
- _,bodies=validate_text(v['text'].encode(),year,week)
- validate_ics(v['ics'].encode(),bodies)
- events=Calendar.from_ical(v['ics'].encode()).walk('VEVENT')
- menus={m['date']:m for m in v['data']['menus']}
- for e in events:
-  start=e.decoded('DTSTART'); end=e.decoded('DTEND')
-  if start.strftime('%H:%M')!='12:00' or end.strftime('%H:%M')!='13:45' or start.date()!=end.date(): raise ValueError('meal window changed')
-  if str(e.get('DTSTART').params.get('TZID'))!='Europe/Berlin' or str(e.get('DTEND').params.get('TZID'))!='Europe/Berlin': raise ValueError('meal timezone changed')
-  if str(e.get('LOCATION'))!='Landkreis Restaurant Osnabrück, Am Schölerberg 1, 49082 Osnabrück, Deutschland': raise ValueError('meal location changed')
-  if int(e.get('SEQUENCE',-1))<5: raise ValueError('event sequence regressed')
-  if str(e.get('TRANSP'))!='OPAQUE': raise ValueError('meal transparency changed')
-  if str(e.get('UID'))!='landkreis-speiseplan-'+start.date().isoformat()+'@pro-mac-support.de': raise ValueError('event identity changed')
-  if v['data']['source_url']!=str(e.get('URL')): raise ValueError('source URL changed')
-  menu=menus[start.date().isoformat()]; description=str(e.get('DESCRIPTION',''))
-  for category in ('soups','mains','sides','vegetables','desserts','salads'):
-   for item in menu[category]:
-    expected=item['text']+(' – '+item['price'] if item.get('price') else '')
-    if expected not in description: raise ValueError('normalized item/price missing from ICS')
- print(json.dumps({'ok':True,'week':v['week']}))
-except (ValueError,RuntimeError,TypeError,KeyError,IndexError,AttributeError) as e:
- print(json.dumps({'ok':False,'kind':type(e).__name__,'message':'ICS validation: '+str(e)}))
-'''
-        return json.loads(run([VALIDATOR, '-c', command, json.dumps(result), target], cwd=HOME / 'scripts'))
+        # Anchor validation to this trusted guard, NEVER to the candidate cwd.
+        # -I excludes cwd/PYTHONPATH so candidate modules cannot shadow checks.
+        return json.loads(run([PYTHON, '-I', ARTIFACT_VALIDATOR,
+                               json.dumps(result), target], cwd=ARTIFACT_VALIDATOR.parent))
     return result
 
 
