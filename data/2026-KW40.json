@@ -1,0 +1,257 @@
+{
+  "week": "2026-KW40",
+  "week_start": "2026-09-28",
+  "source_url": "https://www.landkreis-restaurant.de/documents/282/Speise40.2026.pdf",
+  "menus": [
+    {
+      "day": "Montag",
+      "date": "2026-09-28",
+      "soups": [
+        {
+          "text": "Karotten-Eintopf mit Kartoffelwürfel… und Bockwurst",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Feiner deftiger Schweinebraten in Paprikakruste mit Mett-Mozzarellafüllung und einer Wirsingpfeffersauce",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Nudeln Bolonaise mit anständig Hackfleisch in Basilikum-Tomatensauce und Parmesankäse",
+          "price": "7,50 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Süßkartoffel-püree",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Bratkartoffeln / Versteht sich",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Brokkoli in Mandelsauce",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Leipziger Allerlei",
+          "price": "1,50 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": [
+        {
+          "text": "Kartoffeltasche LmIT frischkäsecremefüllun",
+          "price": "7,00 €"
+        }
+      ]
+    },
+    {
+      "day": "Dienstag",
+      "date": "2026-09-29",
+      "soups": [
+        {
+          "text": "Grünkohleintopf (dies Jahr hat es schon gefroren: Jan / Febr Mit Mettwurst",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Fischfilet leicht mehliert auf einem Pastinakenpüree gesund durch den Dienstag",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Serviertenknödel mit frischen Pfifferlingen wie Champignons, Gemüsejulien in Kräuterrahmsauce, die Pfifferlingzeit hat begonnen",
+          "price": "7,50 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Gemüsereis",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Kräuter-kartoffeln",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Kohlrabi in rahm",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Balkangemüse",
+          "price": "1,50 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": [
+        {
+          "text": "einen geb. Camembert mit Preiselbeeren",
+          "price": "7,00 €"
+        }
+      ]
+    },
+    {
+      "day": "Mittwoch",
+      "date": "2026-09-30",
+      "soups": [
+        {
+          "text": "Linsensuppe mit Kartoffelwürfel und Bockwurst",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Schweinefiletgeschnetzeltes mit frischen Pfifferlingen in Kräuterrahmsauce…einfach..lecker…ein Renner! Noch Fragen?",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Eine Bayrische Spätzlepfanne mit Kasslerwürfel, Kraut, Biersauce und Röstzwiebeln",
+          "price": "7,50 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Einen Reis mit Kichererbsen",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Butter-Kartoffeln mit Petersilie",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Speckbohnen",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Blumenkohl-gratin",
+          "price": "1,50 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": [
+        {
+          "text": "ein Grünkohlbratling",
+          "price": "7,00 €"
+        }
+      ]
+    },
+    {
+      "day": "Donnerstag",
+      "date": "2026-10-01",
+      "soups": [
+        {
+          "text": "Wirsing-Kartoffeleintopf mit o. ohne Wurst",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Sauerbraten vom Deutschen Rind, Butterweich in einer feinen sauce ohne Rosinen!!!",
+          "price": "8,00 €"
+        },
+        {
+          "text": "Moussaka alt Griechisch mit Aubergine, Gehacktem, Tomaten, Kartoffelscheiben und mit Käse in der Cocotte gratiniert AUCH VEGETARISCH",
+          "price": "7,50 €"
+        },
+        {
+          "text": "zum Salat: eine Gemüse / kartoffelschnitte Mmit Minzschmand",
+          "price": "7,00 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Gebratene Sesamspätzle",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Kräuter-kartoffeln",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Rotwein-Rotkohl",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Feine Erbsen, Tomatisiert",
+          "price": "1,50 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": []
+    },
+    {
+      "day": "Freitag",
+      "date": "2026-10-02",
+      "soups": [
+        {
+          "text": "Holsteiner Gemüseeintopf mit o. ohne Wurst",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Rotbarschfilet in Butter gebraten auf einem Chinakohl in Dillrahm",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Überraschung aus den Töpfen der Landkreisküche",
+          "price": ""
+        }
+      ],
+      "sides": [
+        {
+          "text": "Pilawreis",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Gemüsegratin",
+          "price": "1,50 €"
+        },
+        {
+          "text": "OS-Mixsalat",
+          "price": "1,20 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": []
+    }
+  ]
+}
