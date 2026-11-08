@@ -1,0 +1,253 @@
+{
+  "week": "2026-KW46",
+  "week_start": "2026-11-09",
+  "source_url": "https://www.landkreis-restaurant.de/documents/292/Speise_46.2026_.pdf",
+  "menus": [
+    {
+      "day": "Montag",
+      "date": "2026-11-09",
+      "soups": [
+        {
+          "text": "Steckrüben Kartoffelweintopf Mit Wurst",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Hähnchenbrustfilet mit Kokos, und Soja mariniert auf einem Ragout von „Chinagemüse“in Curcuma versteht sich",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Pasta Bolonaise mit Hackfleisch, Hirtenkäse, Tomaten-Ajvarsauce und Blätterteig auch mit Linsen / Vegetarisch",
+          "price": "7,50 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Langkornreis „Asiatischer Art“",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Kartoffel Wedges",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Honig Möhrchen",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Broccoli in Hollandaise",
+          "price": "1,50 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-desset",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": [
+        {
+          "text": "ein Gemüseschnitzel mit Schmand",
+          "price": "7,00 €"
+        }
+      ]
+    },
+    {
+      "day": "Dienstag",
+      "date": "2026-11-10",
+      "soups": [
+        {
+          "text": "Weißkohl-Kartoffeleintopf mit o. ohne Wurst",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Rindergeschnetzeltes mit gebratenen Spitzkohl in einer Kräuter-Rotweinsauce",
+          "price": "8,00 €"
+        },
+        {
+          "text": "Gebratene Schupfnudeln CFG, L mit einem Pak Choi in Sojarahm mit Kokos und allerlei Kräutern",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Zum Salat: Hähnchenkeule F (diesmal sind reichlich da!!)",
+          "price": "7,00 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Erbsereis",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Schnittlauch kartoffeln",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Grüne Bohnen mit Speck",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Leipziger Allerlei",
+          "price": "1,50 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": []
+    },
+    {
+      "day": "Mittwoch",
+      "date": "2026-11-11",
+      "soups": [
+        {
+          "text": "Hackfleisch-Porreeeintopf (Hausfraunsuppe )",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Schweineschnitzel „Zingara“ mit Paprika, Zwiebeln, pilzen und einer würzigen Tomatensauce",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Gebackenes Schollenfilet mit einer Honig-Dillsenfsauce Da riecht man die Küste doch schon…",
+          "price": "7,50 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Kartoffel Kroketten",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Butter kartoffeln",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Erbsen-Möhrengemüse",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Blumenkohl",
+          "price": "1,50 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": [
+        {
+          "text": "Gebackener Camernbert mit Honig-Preiselbeeren",
+          "price": "7,00 €"
+        }
+      ]
+    },
+    {
+      "day": "Donnerstag",
+      "date": "2026-11-12",
+      "soups": [
+        {
+          "text": "Möhren-Kartoffeleintopf mit o. ohne Wurst",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Grünkohl Oldenburger Art mit Kasseler, frischer wie geräucherter Mettwurst und eine Schaufel Senf",
+          "price": "9,00 €"
+        },
+        {
+          "text": "Spinatknödel mit Zwiebeln, Waldpilzen und Gemüsestreifen in Rahm, serviert mit Petersilienbrösel",
+          "price": "7,50 €"
+        }
+      ],
+      "sides": [
+        {
+          "text": "Butterkartoffeln",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Bratkartoffeln",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Euromixgemüse",
+          "price": "1,50 €"
+        },
+        {
+          "text": "Kohlrabi in rahm",
+          "price": "1,50 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": [
+        {
+          "text": "Hähnchenbrust mit Cornflakes-Panade und Preiselbeeren",
+          "price": "7,00 €"
+        }
+      ]
+    },
+    {
+      "day": "Freitag",
+      "date": "2026-11-13",
+      "soups": [
+        {
+          "text": "Omas Gemüseeintopf mit Wurst",
+          "price": "6,00 €"
+        }
+      ],
+      "mains": [
+        {
+          "text": "Tilapiafilet mit einer Frankfurtersauce ( Viele Kräuter in einer Bechamel)",
+          "price": "7,50 €"
+        },
+        {
+          "text": "Surprise - wieder leckere Überraschung aus den Landkreistöpfen",
+          "price": ""
+        }
+      ],
+      "sides": [
+        {
+          "text": "Salzkartoffeln",
+          "price": "1,50 €"
+        }
+      ],
+      "vegetables": [
+        {
+          "text": "Brocckoligratin",
+          "price": "1,50 €"
+        }
+      ],
+      "desserts": [
+        {
+          "text": "Tages-dessert",
+          "price": "1,20 €"
+        }
+      ],
+      "salads": []
+    }
+  ]
+}
